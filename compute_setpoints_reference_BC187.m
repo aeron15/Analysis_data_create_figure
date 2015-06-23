@@ -104,7 +104,7 @@ rm_strains = {'YIIc17_E5*'; 'i273614N*'; 'i378604X*'; 'YS4*'; 'NCYC110*'; 'Y55*'
 strains = setdiff(all_strains, rm_strains);
 filename='All_data';
 
-[data_output,loc]=make_dot_plot_WC_renan_20150609(strains, all_strains_vals_vector, all_strains_names, filename);
+[data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
 average_perc_difference_replicates=compute_percent_difference_between_replicates(data_output);
 
@@ -131,7 +131,7 @@ strains = setdiff(all_strains, rm_strains);
 filename='Fig_1_natural_isolates_20150609';
 
 %make_dot_plot_WC_renan_20150403(strains, all_strains_vals_vector, all_strains_names, filename);
-[data_output,loc]=make_dot_plot_WC_renan_20150609(strains, all_strains_vals_vector, all_strains_names, filename);
+[data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 save('data_output_figure_1','data_output');
 
 % Average standard deviation for paper
@@ -163,7 +163,7 @@ YJM421_DBPVG1373_range=2.^abs(mean(data_output(27).values)-mean(data_output(6).v
 strains = {'RYB53*', 'RYB59*', 'RYB65*', 'RYB66*'};
 
 filename='Fig_3_allele_swaps_20150609';
-[data_output,loc]=make_dot_plot_WC_renan_20150609(strains, all_strains_vals_vector, all_strains_names, filename);
+[data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
 %compute_conversion_rate
 
@@ -183,7 +183,7 @@ BC187background_differences./InterStrain_distance
 strains = {'RY16*', 'RYB53*', 'RYB59*', 'RYB65*', 'RYB66*', 'RYB28*'};
 
 filename='Fig_3_allele_swaps';
-[fig3,loc]=make_dot_plot_WC_renan_20150609(strains, all_strains_vals_vector, all_strains_names, filename);
+[fig3,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
 %compute_conversion_rate
 
@@ -214,7 +214,7 @@ p
 
 strains = {'RYC45*','RYC58*','RYC49*', 'RYC50*','RYC51*', 'RYC59_1*','RYC52*','RYC60*','RYC62*', 'RYB92*', 'RYC72*','RYD27*', 'RYD28*', 'RYD30*', 'RYD31*', 'RYB59*', 'RYB53*'};
 filename='Fig_4_YJ_bg_Diff_alleles';
-[data_output,loc]=make_dot_plot_WC_renan_20150609(strains, all_strains_vals_vector, all_strains_names, filename);
+[data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 T_test_walking(data_output, loc);
 
 %Range of variation
@@ -230,12 +230,12 @@ save('data_output_figure_4','data_output');
 strains_BC = {'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*'};
 
 filename='Fig5_BC';
-make_dot_plot_WC_renan_20150609(strains_BC, all_strains_vals_vector, all_strains_names, filename);
+make_dot_plot(strains_BC, all_strains_vals_vector, all_strains_names, filename);
 %% Figure 5
 
 strains_YJM = {'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'; 'RYD52*'; 'RYD55*'; 'RYD06*'};
 filename='Fig5_YJ_alelle';
-make_dot_plot_WC_renan_20150609(strains_YJM, all_strains_vals_vector, all_strains_names, filename);
+make_dot_plot(strains_YJM, all_strains_vals_vector, all_strains_names, filename);
 display('done')
 
 
@@ -243,7 +243,7 @@ display('done')
 strains_BC = {'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*';'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'; 'RYD52*'; 'RYD55*'; 'RYD06*'};
 
 filename='Fig5_BC_YJ';
-make_dot_plot_WC_renan_20150609(strains_BC, all_strains_vals_vector, all_strains_names, filename);
+make_dot_plot(strains_BC, all_strains_vals_vector, all_strains_names, filename);
 
 %% SI figures. Hemizygous hybrid strains
 
@@ -252,7 +252,7 @@ strains={'RYB22';
 'RYB24'}
 %'RYB42'}
 filename='GAL3_HH';
-[data_output,loc]=make_dot_plot_WC_renan_20150609(strains, all_strains_vals_vector, all_strains_names, filename);
+[data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
 [h,p]=ttest2(data_output(2).values,data_output(1).values)
 [h,p]=ttest2(data_output(3).values,data_output(1).values)
@@ -263,7 +263,7 @@ strains={'RYC69';
 'RYB22'
 };
 filename='SOK1_HH';
-[data_output,loc]=make_dot_plot_WC_renan_20150609(strains, all_strains_vals_vector, all_strains_names, filename);
+[data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
 [h,p]=ttest2(data_output(1).values,data_output(3).values)
 [h,p]=ttest2(data_output(2).values,data_output(3).values)

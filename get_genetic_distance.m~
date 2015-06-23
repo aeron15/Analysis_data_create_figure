@@ -2,7 +2,7 @@ function QueryStrains_genetic_distance=get_genetic_distance(Strain_1,Strain_2)
 
 %Determines the genetic distance between strains
 
-load('Cromie_distances.mat')
+load('Cromie_distances_2.mat')
 
 %Check if replacing is needed
 
