@@ -1,4 +1,4 @@
-function [data_output,loc]=make_dot_plot_WC_renan_20150609(strains, diff_sp, names, filename)
+function [data_output,loc]=make_dot_plot(strains, diff_sp, names, filename)
 
 %% The MAKE_DOT_PLOT function makes a dot plot with errorbars
 
@@ -46,7 +46,7 @@ for iStrain = 1:length(strains_new)
     
 end
 
-format_fig_KL_v1(k, strains, loc)
+format_fig(k, strains, loc)
 
 %% Save data and the s
 
