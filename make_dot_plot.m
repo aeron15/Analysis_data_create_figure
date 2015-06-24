@@ -1,4 +1,4 @@
-function [data_output,loc]=make_dot_plot_WC_renan_20150609(strains, diff_sp, names, filename)
+function [data_output,loc]=make_dot_plot(strains, diff_sp, names, filename)
 
 %% The MAKE_DOT_PLOT function makes a dot plot with errorbars
 
@@ -10,15 +10,15 @@ for iStrain = 1:length(strains)
     cs = cellfun(@isempty,curr_strain);
     
     idx = find(cs==0);
-
+    
     data_output(iStrain).strain=lab{iStrain};
     data_output(iStrain).values=(diff_sp(idx));
-
+    
     hold all;
     sp_mean(iStrain) = mean(diff_sp(idx));
     sp_std(iStrain) = std(diff_sp(idx));
     std_error(iStrain) = sp_std(iStrain)/sqrt(length(idx)-1);
- 
+    
 end
 
 
@@ -35,18 +35,21 @@ for iStrain = 1:length(strains_new)
     cs = cellfun(@isempty,curr_strain);
     
     idx = find(cs==0);
-
+    
     hold all;
-
+    
     sp_mean = diff_sp(idx);
-    iStrain
+    
+    if isempty(sp_mean)
+        sp_mean=nan;
+    end
     plot(iStrain,sp_mean,'ok','MarkerSize',10,'MarkerFaceColor',[0.5 0.5 0.5]);
     hold all;
     plot(iStrain,mean(sp_mean),'ok','MarkerSize',10,'MarkerFaceColor',rgb('DarkOrange'));
     
 end
 
-format_fig_KL_v1(k, strains, loc)
+format_fig(k, strains, loc)
 
 %% Save data and the s
 
