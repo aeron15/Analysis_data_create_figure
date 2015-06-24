@@ -1,4 +1,4 @@
-%20150605
+%COMPUTE_SETPOINTS_REFERENCE_BC187
 
 %Input should be the set points normalized in data
 %Compute confidence interval for the true value of the set point of BC187
@@ -24,7 +24,9 @@
 %% Compute confidence interval
 
 
-path_data='~/Dropbox/Phenotypic_diversity/var_analysis_data/20150623_data/GLU/'
+path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_analysis_data/20150623_data/GLU/'
+
+%path_data='20150623_data/GLU/'
 
 load([path_data 'setpoints_normalized.mat']);
 
