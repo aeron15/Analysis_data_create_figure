@@ -1,3 +1,4 @@
+function compute_setpoints_reference_BC187_galactose
 %COMPUTE_SETPOINTS_REFERENCE_BC187_galactose
 
 % This computes the renormalized data for galactose
@@ -71,6 +72,10 @@ filename='Fig_1_all_strains_galactose_titration';
 
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
+data_output(1).values=nanmean(BC187_vals_vector)
+save('data_output_natural_isolates_galactose_titration','data_output');
+
+
 %% Get all the set points of induction of all the strains
 
 %Removed CLIB215
@@ -93,6 +98,10 @@ strains = setdiff(all_strains, rm_strains);
 filename='Fig_1_natural_isolates_galactose_titration';
 
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
+
+save('data_output_figure_galactose_titration','data_output');
+
+
 
 
 

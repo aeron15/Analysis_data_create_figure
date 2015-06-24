@@ -1,3 +1,5 @@
+function compute_setpoints_reference_BC187()
+
 %COMPUTE_SETPOINTS_REFERENCE_BC187
 
 %Input should be the set points normalized in data
@@ -110,6 +112,8 @@ filename='All_data';
 
 average_perc_difference_replicates=compute_percent_difference_between_replicates(data_output);
 
+save('data_output_figure_glucose_titration','data_output');
+
 
 %% Figure 1. Setpoints of natural isolates
 
@@ -135,6 +139,7 @@ filename='Fig_1_natural_isolates_20150609';
 %make_dot_plot_WC_renan_20150403(strains, all_strains_vals_vector, all_strains_names, filename);
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 save('data_output_figure_1','data_output');
+save('data_output_natural_isolates_glucose_titration','data_output');
 
 % Average standard deviation for paper
 average_standard_deviation=compute_average_standard_deviation(data_output);
@@ -210,7 +215,7 @@ set_1=[fig3(1).values;fig3(6).values-Delta_GAL3];%haploids
 set_2=[fig3(3).values;fig3(4).values-Delta_GAL3];
 
 [h,p,ci,stats]=ttest2(set_1,set_2);
-p
+
 
 %% Figure 4. Natural Isolate ORF swaps into YJM978 
 
