@@ -42,29 +42,35 @@ for iStrain=1:length(AlleleReplacement_names)
     if idx
         x1(iStrain,1)=mean(data_output4(iStrain).values);
         x1(iStrain,2)=mean(data_output1(idx).values);
+        
+        x1(iStrain,3)=compute_standard_error(data_output4(iStrain).values);
+        x1(iStrain,4)=compute_standard_error(data_output1(idx).values);
+        
     end
 end
-%%
+%% PLOT correlation plot
 hfig=figure;
 hold all;
 
 x=x1(:,1);
 y=x1(:,2);
-plot(x,y,'.');
+plot(x,y,'.','MarkerSize',14);
 
 
 coeffs = polyfit(x, y, 1);
 % Get fitted values
-fittedX = linspace(min(x), max(x), 200);
+fittedX = linspace(min(x)-1, max(x)+1, 200);
 fittedY = polyval(coeffs, fittedX);
 % Plot the fitted line
 hold on;
-plot(fittedX, fittedY, 'r-', 'LineWidth', 3);
+plot(fittedX, fittedY, 'r-', 'LineWidth', 3,'MarkerSize',15);
 
 
 xlabel('Allele replacement set point')
 ylabel('Natural isolate set point')
 Set_fig_RE(hfig,9,9,20)
+xlim([-9 -3 ])
+ylim([-9 -3 ])
 
 
 [R,P]=corrcoef(x1(:,1),x1(:,2));
@@ -72,3 +78,8 @@ Set_fig_RE(hfig,9,9,20)
 
 Correlation_Coefficient=R(1,2);
 P_Value=P(1,2);
+axis square;
+
+filename=('correlation_natural_isolates_allele_swaps')
+export_fig(filename,'-pdf',  '-transparent', '-nocrop')
+%% 

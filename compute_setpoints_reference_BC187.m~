@@ -256,7 +256,7 @@ filename='Fig5_BC';
 make_dot_plot(strains_BC, all_strains_vals_vector, all_strains_names, filename);
 %% Figure 5
 %strains_YJM = {'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'; 'RYD52*'; 'RYD55*'; 'RYD06*'};
-strains_YJM = {'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'};
+strains_YJM = {'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*';  'RYD06*'};
 filename='Fig5_YJ_alelle';
 make_dot_plot(strains_YJM, all_strains_vals_vector, all_strains_names, filename);
 display('done')
