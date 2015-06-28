@@ -1,10 +1,10 @@
-function compute_setpoints_reference_BC187_galactose
-%COMPUTE_SETPOINTS_REFERENCE_BC187_galactose
+function compute_setpoints_reference_BC187_galactose()
+%COMPUTE_SETPOINTS_REFERENCE_BC187_GALACTOSE
 
-% This computes the renormalized data for galactose
-% Compute confidence interval
+%% This section computes the renormalized data for galactose
 
-path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_analysis_data/20150623_data/GAL/'
+
+path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_analysis_data/20150623_data/GAL/';
 
 load([path_data 'setpoints_normalized.mat']);
 
@@ -56,7 +56,7 @@ all_strains  = {'Y55*'; 'NCYC110*'; 'L_1528*'; 'DBVPG6044*';
     'YJM975*';
     'FL100*'; 'i273614N*';
     'BC187*'; 'YJM978*';
-    'RYC45*';'RYC58*';'RYC49*'; 'RYC50*';'RYC51*'; 'RYC59_1*';'RYC52*';'RYC60*';'RYC62*'; 'RYB92*'; 'RYC72*'}
+    'RYC45*';'RYC58*';'RYC49*'; 'RYC50*';'RYC51*'; 'RYC59_1*';'RYC52*';'RYC60*';'RYC62*'; 'RYB92*'; 'RYC72*'};
     
 %     'RY16*'; 'RYB53*'; 'RYB59*'; 'RYB65*'; 'RYB66*'; 'RYB28*';
 %     'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*';
@@ -72,8 +72,12 @@ filename='Fig_1_all_strains_galactose_titration';
 
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
-data_output(1).values=nanmean(BC187_vals_vector)
-save('data_output_natural_isolates_galactose_titration','data_output');
+data_output(1).values=nanmean(BC187_vals_vector);
+data_output_galactose=data_output;
+save('data_output_natural_isolates_galactose_titration','data_output_galactose');
+
+filename = ['NaturalIsolatesStrains_galactose_setpoints.pdf'];
+export_fig(filename, '-pdf','-transparent','-nocrop');
 
 
 %% Get all the set points of induction of all the strains
@@ -99,7 +103,13 @@ filename='Fig_1_natural_isolates_galactose_titration';
 
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
-save('data_output_figure_galactose_titration','data_output');
+data_output_galactose=data_output;
+save('data_output_figure_galactose_titration','data_output_galactose');
+
+
+filename = ['AllStrain_galactose_setpoints.pdf'];
+export_fig(filename, '-pdf','-transparent','-nocrop');
+
 
 
 

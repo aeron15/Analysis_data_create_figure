@@ -1,12 +1,6 @@
 function compute_correlation_galactose_glucose
 
-%% Plot correlation of glucose and galactose
-
-% load('data_output_figure_galactose_titration.mat')
-% data_output_galactose=data_output;
-% 
-% load('data_output_figure_glucose_titration.mat')
-% data_output_glucose=data_output;
+%COMPUTE_CORRELATION_GALACTOSE_GLUCOSE
 
 % Plot the natural isolates
 

@@ -201,7 +201,6 @@ YJM978background_differences=abs(mean(fig3(2).values)-mean(fig3(1).values))
 
 BC187background_differences=abs(mean(fig3(3).values)-mean(fig3(4).values));
 
-
 YJM978background_differences./InterStrain_distance
 BC187background_differences./InterStrain_distance
 
@@ -262,7 +261,7 @@ filename='Fig5_BC_YJ';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
 %Determine fold differences between pairs of strains 
-determine_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)
+ determine_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)
 
 %% SI figures. Hemizygous hybrid strains
 

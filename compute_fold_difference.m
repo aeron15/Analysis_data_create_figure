@@ -33,7 +33,7 @@ high2=Strain2_mean+Strain2_SEM;
 FoldDifferenceHigherBound=2.^(abs(high1-high2));
 
 
-FoldDifferenceMean=2.^abs(Strain1_mean-Strain2_mean)
+FoldDifferenceMean=2.^abs(Strain1_mean-Strain2_mean);
 
 ErrorFoldDifference=sqrt((Strain1_std).^2+(Strain2_std).^2);
 %^BC187_YJM978_error_difference_Strains=sqrt((BC187_std_fig1).^2+(YJM978_std_fig1).^2);
