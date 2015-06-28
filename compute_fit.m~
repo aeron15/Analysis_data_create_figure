@@ -5,9 +5,6 @@ function [fittedX, fittedY]=compute_fit(x,y)
 %% Removes NANs rom the data
 
 matrix=[x' y'];
-matrix=matrix(~any(isnan(matrix),2),:);
-x=matrix(:,1);
-y=matrix(:,2);
 
 %%
 coeffs = polyfit(x, y, 1);

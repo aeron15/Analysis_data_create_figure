@@ -48,8 +48,8 @@ hold all;
 plot(QueryStrain_SetPointGalactose,QueryStrain_SetPointGlucose,'.');
 
 % Plot the fitted line
-% [fittedX, fittedY]=compute_fit(QueryStrain_SetPointGalactose,QueryStrain_SetPointGlucose)
-% plot(fittedX, fittedY, 'r-', 'LineWidth', 3,'MarkerSize',15)
+[fittedX, fittedY]=compute_fit(QueryStrain_SetPointGalactose,QueryStrain_SetPointGlucose)
+plot(fittedX, fittedY, 'r-', 'LineWidth', 3,'MarkerSize',15)
 
 
 xlabel('Galactose set point')
