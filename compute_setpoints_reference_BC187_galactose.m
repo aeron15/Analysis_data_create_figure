@@ -80,7 +80,7 @@ filename = ['NaturalIsolatesStrains_galactose_setpoints.pdf'];
 export_fig(filename, '-pdf','-transparent','-nocrop');
 
 
-%% Get all the set points of induction of all the strains
+%% Get all the set points of induction of natural isolates
 
 %Removed CLIB215
 all_strains  = {'Y55*'; 'NCYC110*'; 'L_1528*'; 'DBVPG6044*';
@@ -104,7 +104,9 @@ filename='Fig_1_natural_isolates_galactose_titration';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
 data_output_galactose=data_output;
-save('data_output_figure_galactose_titration','data_output_galactose');
+save('data_output_natural_isolates_galactose_titration','data_output_galactose');
+
+
 
 
 filename = ['AllStrain_galactose_setpoints.pdf'];
