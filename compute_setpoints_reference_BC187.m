@@ -229,7 +229,6 @@ strain1= data_output(loc(1)).strain;
 strain2= data_output(loc(end)).strain;
 [FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
 
-
 save('data_output_figure_4','data_output');
 
 %Compute correlation coefficient between natural isolates and allele
@@ -253,7 +252,6 @@ filename='Fig5_YJ_alelle';
 StrainsWithYJM978Allele_names={data_output.strain}';
 
 %% Figure 5 all allele replacements of YJM978 and BC187
-close all;
 %strains_BC = {'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*';'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'; 'RYD52*'; 'RYD55*'; 'RYD06*'};
 strains = {'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*';'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'};
 
@@ -261,10 +259,10 @@ filename='Fig5_BC_YJ';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
 %Determine fold differences between pairs of strains 
-%determine_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)
+[AlleleReplacementBackgrounds_mean,AlleleReplacementBackgrounds_std]=determine_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)
 
 %% SI figures. Hemizygous hybrid strains
-
+close all;
 strains={'RYB22';
 'RYB23';
 'RYB24'}

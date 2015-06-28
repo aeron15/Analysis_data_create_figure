@@ -57,11 +57,7 @@ y=x1(:,2);
 plot(x,y,'.','MarkerSize',14);
 
 
-coeffs = polyfit(x, y, 1);
-% Get fitted values
-fittedX = linspace(min(x)-1, max(x)+1, 200);
-fittedY = polyval(coeffs, fittedX);
-% Plot the fitted line
+[fittedX, fittedY]=compute_fit(x,y)
 hold on;
 plot(fittedX, fittedY, 'r-', 'LineWidth', 3,'MarkerSize',15);
 
