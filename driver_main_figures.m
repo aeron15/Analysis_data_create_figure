@@ -1,3 +1,8 @@
+function driver_main_figures
+
+%DRIVER_MAIN_FIGURES plots the main figures of the paper in a nice
+%format
+
 load data_output_figure_1.mat
 plot_figure_mean_error_bar_side_histogram(data_output,'file_append','figure1')
 

@@ -31,17 +31,25 @@ end
 %Average the distance for the cases where there is more than one distance
 %computed
 
-QueryStrains_mean_genetic_distance=cellfun(@(x) nanmean(x(:)), QueryStrains_matrix(:,4), 'UniformOutput', false);
+QueryStrains_MeanGeneticDistance=cellfun(@(x) nanmean(x(:)), QueryStrains_matrix(:,4), 'UniformOutput', false);
 
-QueryStrains_mean_genetic_distance=cell2mat(QueryStrains_mean_genetic_distance);
-%% Plot correlation
+QueryStrains_MeanGeneticDistance=cell2mat(QueryStrains_MeanGeneticDistance);
+%% Plot correlation of genetic distance and the pairwise difference between set points
 
 x=[QueryStrains_matrix{:,3}];
 
-figure(25)
-plot(x,QueryStrains_mean_genetic_distance,'.')
+hfig=figure();
+plot(x,QueryStrains_MeanGeneticDistance,'.')
 xlabel('Difference set points')
 ylabel('Genetic distance')
+xlabel('Set point of induction of BC187')
 
-NaturalIsolates_correlation=nancorr(x,QueryStrains_mean_genetic_distance)
+Set_fig_RE(hfig,14,14,14)
+
+%%
+filename='Correlation set point of induction and genetic distance';
+export_fig(filename, '-pdf','-transparent','-nocrop');
+
+
+NaturalIsolates_correlation=nancorr(x,QueryStrains_MeanGeneticDistance);
 end
