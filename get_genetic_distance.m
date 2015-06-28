@@ -1,6 +1,7 @@
 function QueryStrains_genetic_distance=get_genetic_distance(Strain_1,Strain_2)
 
-%Determines the genetic distance between strains
+%GET_GENETIC_DISTANCE Determines the genetic distance between strains
+%It calls the function REPLACE_STRAIN
 
 load('Cromie_distances_2.mat')
 
@@ -11,12 +12,12 @@ Strain_2=replace_strain(Strain_2);
 
 %Find index of the strain
 
-curr_strain = regexp(names_strains, Strain_1);
+curr_strain = regexp(CromieStrains_names, Strain_1);
 cs = cellfun(@isempty,curr_strain);
 Strain1_idx = find(cs==0);
 
 
-curr_strain = regexp(names_strains, Strain_2);
+curr_strain = regexp(CromieStrains_names, Strain_2);
 cs = cellfun(@isempty,curr_strain);
 Strain2_idx = find(cs==0);
 
@@ -30,14 +31,4 @@ end
 
 end
 
-function Strain=replace_strain(Strain)
-
-if strcmp(Strain,'Bb32')
-    
-    Strain='RM11';
-    
-    
-end
-
-end
 
