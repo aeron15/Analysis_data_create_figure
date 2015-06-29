@@ -45,7 +45,7 @@ end
 hfig=figure;
 hold all;
 
-plot(QueryStrain_SetPointGalactose,QueryStrain_SetPointGlucose,'.');
+plot(QueryStrain_SetPointGalactose,QueryStrain_SetPointGlucose,'.','MarkerSize',15);
 
 % Plot the fitted line
 [fittedX, fittedY]=compute_fit(QueryStrain_SetPointGalactose,QueryStrain_SetPointGlucose)
