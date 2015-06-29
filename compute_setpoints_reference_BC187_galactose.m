@@ -51,7 +51,7 @@ filename='Fig_1_all_strains_galactose_titration';
 
 data_output(1).values=nanmean(BC187_vals_vector);
 data_output_galactose=data_output;
-save('data_output_natural_isolates_galactose_titration','data_output_galactose');
+save('data_output_figure_galactose_titration','data_output_galactose');
 
 filename = ['NaturalIsolatesStrains_galactose_setpoints.pdf'];
 export_fig(filename, '-pdf','-transparent','-nocrop');

@@ -183,7 +183,11 @@ Delta_GAL3=BC_het_effect-YJ_het_effect;
 set_1=[fig3(1).values;fig3(6).values-Delta_GAL3];%haploids
 set_2=[fig3(3).values;fig3(4).values-Delta_GAL3];
 
+%T-TEST 
 [h,p,ci,stats]=ttest2(set_1,set_2);
+
+%MANN-WHITNEY
+[p,h,stats] = ranksum(set_1,set_2);
 
 
 %% Figure 4. Natural Isolate ORF swaps into YJM978 
