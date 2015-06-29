@@ -25,8 +25,7 @@ function compute_setpoints_reference_BC187()
 
 % To plot data look a the script driver_main_figures.m
 
-%% Compute confidence interval
-
+%% Load data
 
 path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_analysis_data/20150623_data/GLU/'
 
@@ -34,35 +33,9 @@ path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_analysis_data/
 
 load([path_data 'setpoints_normalized.mat']);
 
-%Compute the 95% confidence interval for estimate
+%% Filter data using BC187 set points
 
-BC187_vals_vector=cell2mat(setpoints_normalized(:,1));
-
-BC187_mean=nanmean(BC187_vals_vector);
-
-BC187_std=nanstd(BC187_vals_vector);
-
-% Standard deviation and length of the vector
-%SEM = std(x)/sqrt(length(x));  
-BC187_len=sum(~isnan(BC187_vals_vector));
-
-BC187_SEM = BC187_std/sqrt(BC187_len);  
-
-%ts = tinv([0.025  0.975],BC187_len-1);      % T-Score
-
-ts = tinv([0.01  0.99],BC187_len-1);      % T-Score
-
-CI = BC187_mean + ts*BC187_SEM;
-
-%% Compute the 10% above the mean and 10% below the mean and remove bad data
-
-higher_bound= 1.1* BC187_mean;
-lower_bound=0.89 * BC187_mean;
-
-idx_to_remove=~(higher_bound * BC187_mean & BC187_vals_vector < lower_bound);
-setpoints_normalized(idx_to_remove,:)=[];
-
-plot_hist_BC187_vals(BC187_vals_vector,higher_bound,lower_bound)
+setpoints_normalized = filter_SetPointsNormalized(setpoints_normalized);
 
 %% Create variable equivalent to dif_sp.mat from the plot_all_figs_1
 

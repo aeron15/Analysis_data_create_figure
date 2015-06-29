@@ -1,46 +1,23 @@
 function compute_setpoints_reference_BC187_galactose()
 %COMPUTE_SETPOINTS_REFERENCE_BC187_GALACTOSE
 
-%% This section computes the renormalized data for galactose
-
+%% Load data
 
 path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_analysis_data/20150623_data/GAL/';
 
 load([path_data 'setpoints_normalized.mat']);
 
-%Compute the 95% confidence interval for estimate
+%% Filter data using BC187 set points. 
 
-BC187_vals_vector=cell2mat(setpoints_normalized(:,1));
+setpoints_normalized = filter_SetPointsNormalized(setpoints_normalized);
 
-BC187_mean=nanmean(BC187_vals_vector);
-
-BC187_std=nanstd(BC187_vals_vector);
-
-% Standard deviation and length of the vector
-%SEM = std(x)/sqrt(length(x));  
-BC187_len=sum(~isnan(BC187_vals_vector));
-
-BC187_SEM = BC187_std/sqrt(BC187_len);  
-
-figure;
-hist(BC187_vals_vector,20)
-vline(BC187_mean,'green')
-
-%% Compute the 10% above the mean and 10% below the mean
-
-higher_bound= 1.1* BC187_mean;
-lower_bound=0.89 * BC187_mean;
-vline(higher_bound)
-vline(lower_bound)
-title ('BC187 measurements across replicates')
-
-idx_to_remove=find(~(higher_bound * BC187_mean & BC187_vals_vector < lower_bound));
-setpoints_normalized(idx_to_remove,:)=[];
-
-%Create variable equivalent to dif_sp.mat
+%% Create variable equivalent to dif_sp.mat
 
 all_strains_vals_vector=cell2mat(setpoints_normalized(:,2));
 all_strains_names=setpoints_normalized(:,3);
+
+%Compute BC187 
+BC187_vals_vector=cell2mat(setpoints_normalized(:,1));
 
 %% Get all the strains in the study
 

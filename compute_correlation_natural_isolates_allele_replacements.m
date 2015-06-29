@@ -1,13 +1,13 @@
 function [Correlation_Coefficient,P_Value]=compute_correlation_natural_isolates_allele_replacements()
 
+%COMPUTE_CORRELATION_NATURAL_ISOLATES_ALLELE_REPLACEMENTS
+
 load('data_output_figure_1.mat');
 data_output1=data_output;
 load('data_output_figure_4.mat');
 data_output4=data_output;
 
 clear data_output;
-
-
 
 AlleleReplacement_names={data_output4.strain};
 
@@ -56,8 +56,10 @@ x=x1(:,1);
 y=x1(:,2);
 plot(x,y,'.','MarkerSize',14);
 
+xlim([-9 -3 ])
+ylim([-9 -3 ])
 
-[fittedX, fittedY]=compute_fit(x,y)
+[fittedX, fittedY]=compute_fit(x,y);
 hold on;
 plot(fittedX, fittedY, 'r-', 'LineWidth', 3,'MarkerSize',15);
 
@@ -65,8 +67,7 @@ plot(fittedX, fittedY, 'r-', 'LineWidth', 3,'MarkerSize',15);
 xlabel('Allele replacement set point')
 ylabel('Natural isolate set point')
 Set_fig_RE(hfig,9,9,20)
-xlim([-9 -3 ])
-ylim([-9 -3 ])
+
 
 
 [R,P]=corrcoef(x1(:,1),x1(:,2));

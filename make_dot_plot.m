@@ -1,6 +1,7 @@
 function [data_output,loc]=make_dot_plot(strains, diff_sp, names, filename)
 
-%% The MAKE_DOT_PLOT function makes a dot plot with errorbars
+%MAKE_DOT_PLOT function makes a dot plot with errorbars where the x-axis is
+%the name of the strains and the y axis is the set point of induction
 
 lab = strain_name_conv(strains);
 
@@ -50,11 +51,8 @@ for iStrain = 1:length(strains_new)
 end
 
 format_fig(k, strains, loc)
-
-%% Save data and the s
-
-save(['output_' filename],'data_output','loc')
-
-
-%%
 export_fig(filename, '-pdf','-transparent','-nocrop');
+
+%% Save data into a file
+%save(['output_' filename],'data_output','loc')
+
