@@ -75,7 +75,6 @@ average_perc_difference_replicates=compute_percent_difference_between_replicates
 
 save('data_output_figure_glucose_titration','data_output');
 
-
 %% Figure 1. Setpoints of natural isolates
 
 %Removed CLIB215
@@ -101,10 +100,7 @@ filename='Fig_1_natural_isolates';
 save('data_output_figure_1','data_output');
 save('data_output_natural_isolates_glucose_titration','data_output');
 
-% Average standard deviation of natural isolates set point of induction
-average_standard_deviation=compute_average_standard_deviation(data_output);
-
-%Correlation genetic distance and set point of induction
+%Correlation genetic distance and set point of induction using RAD-seq data
 NaturalIsolates_correlation=compute_correlation_genetic_distance_set_point_induction(data_output);
 
 QueryStrains_counter=determine_strains_in_Cromie();
@@ -116,10 +112,13 @@ Number_of_Groups=T_test_walking(data_output, loc);
 strain1='BC187'; strain2='YJM978';
 [FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
-%Range of the set points on figure 1
+%Range of the set points on figure 1 (Natural Isolates)
 strain1='YJM421'; 
 strain2='DBVPG1373';
 [FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
+
+% Average standard deviation of natural isolates set point of induction
+NaturalIsolates_AverageStandardDeviation=compute_average_standard_deviation(data_output);
 
 %Range of the natural isolates strains on figure 4
 strain1='YJM421'; 
@@ -233,8 +232,8 @@ strains = {'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*';
 filename='Fig5_BC_YJ';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
-%Determine fold differences between pairs of strains 
-[AlleleReplacementBackgrounds_mean,AlleleReplacementBackgrounds_std]=determine_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)
+%Determine fold differences between pairs of strains
+[AlleleReplacementBackgrounds_mean,AlleleReplacementBackgrounds_std]=compute_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)
 
 %% SI figures. Hemizygous hybrid strains
 close all;

@@ -50,6 +50,14 @@ Set_fig_RE(hfig,14,14,14)
 filename='Correlation set point of induction and genetic distance';
 export_fig(filename, '-pdf','-transparent','-nocrop');
 
+%%
 
 NaturalIsolates_correlation=nancorr(x,QueryStrains_MeanGeneticDistance);
+
+
+[x1, y]=remove_nan_rows(x,QueryStrains_MeanGeneticDistance');
+
+[h,p]=corrcoef(x1,y);
+
+
 end

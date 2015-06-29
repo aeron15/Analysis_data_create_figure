@@ -1,3 +1,4 @@
+function compute_ANOVA_to_compare_groups
 %Determine if strains are statistically different using ANOVA for the
 %comparison of groups
 

@@ -1,4 +1,4 @@
-function StrainsGalactoseGlucosenan_correlation=compute_correlation_galactose_glucose
+function StrainsGalactoseGlucose_correlation=compute_correlation_galactose_glucose()
 
 %COMPUTE_CORRELATION_GALACTOSE_GLUCOSE computes the correlation of the mean
 %set points of galactose and glucose
@@ -38,8 +38,6 @@ for iStrain=1:length(common_strains)
     x1=nanmean(data_output_galactose(idx_galactose).values);
     x2=nanmean(data_output_glucose(idx_glucose).values);
     
-    
-    
     QueryStrain_SetPointGalactose(iStrain)=x1;
     QueryStrain_SetPointGlucose(iStrain)=x2;
     
@@ -55,13 +53,13 @@ hold all;
 plot(QueryStrain_SetPointGalactose,QueryStrain_SetPointGlucose,'.','MarkerSize',15);
 
 % Plot the fitted line
-[fittedX, fittedY]=compute_fit(QueryStrain_SetPointGalactose,QueryStrain_SetPointGlucose)
+[fittedX, fittedY]=compute_fit(QueryStrain_SetPointGalactose,QueryStrain_SetPointGlucose);
 plot(fittedX, fittedY, 'r-', 'LineWidth', 3,'MarkerSize',15)
 
 
 xlabel('Galactose set point')
 ylabel('Glucose set point')
-
+title({'Correlation of glucose and galactose set point of induction';[ num2str(length(QueryStrain_SetPointGalactose)) ' between natural isolates for strains']})
 xlim([-6.5 -2.5])
 ylim([-9 -3])
 
@@ -82,4 +80,6 @@ export_fig(filename, '-pdf','-transparent','-nocrop');
 
 %% Compute correlation coefficient
 
-StrainsGalactoseGlucosenan_correlation=nancorr(QueryStrain_SetPointGalactose,QueryStrain_SetPointGlucose);
+[StrainsGalactoseGlucose_correlation] = nancorr(QueryStrain_SetPointGalactose,QueryStrain_SetPointGlucose);
+
+[StrainsGalactoseGlucose_correlation,p] = corrcoef(QueryStrain_SetPointGalactose,QueryStrain_SetPointGlucose,'rows','pairwise');

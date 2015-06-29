@@ -26,10 +26,13 @@ end
 
 [meanDataSorted,idx]=sort(mean_data);
 
-%errorbar(meanDataSorted,standard_error(idx))
 medianDataSort=median(meanDataSorted);
-perc_75=prctile(meanDataSorted,75);
-perc_25=prctile(meanDataSorted,25);
+perc75=prctile(meanDataSorted,75);
+perc25=prctile(meanDataSorted,25);
+
+%Determine number of strains contained between the 25th and 75th percentile
+
+PercentBetweenPerc25Perc75=sum(perc25<mean_data & mean_data<perc75)./length(mean_data);
 
 [counts,centers]=hist(meanDataSorted);
 
@@ -42,8 +45,8 @@ subplot('Position',positionVector1)
 errorbar(meanDataSorted,standard_error(idx),'ok','MarkerFaceColor',[0.5 0.5 0.5],'MarkerSize',8)
 ylim([-9 -3])
 hline(medianDataSort,'k')
-hline(perc_75)
-hline(perc_25)
+hline(perc75)
+hline(perc25)
 xticklabel_rotate(1:length(data_output),45,namesStrains(idx))
 set(gca,'box','off')
 
