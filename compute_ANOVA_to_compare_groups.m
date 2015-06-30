@@ -30,11 +30,13 @@ Strain_names={data_output.strain};
 
 %ANOVA_Query_Strains={'UC5';'Y12-SGRP';'Y12-WashU';'Y9-WashU'}
 
-%% From haplotypes computation 20150622 and  ORF only
+%% From haplotypes ORF only
 
-%ANOVA_Query_Strains={'YJM975','YJM978','YJM981'};
+ANOVA_Query_Strains={'YJM975','YJM978','YJM981'};
+[p,tbl,stats]=compute_ANOVA(ANOVA_Query_Strains,data_output,Strain_names)
 
-% ANOVA_Query_Strains={'BC187','DBVPG1373','DBVPG1788','DBVPG6765','L-1528'};
+
+%ANOVA_Query_Strains={'BC187','DBVPG1373','DBVPG1788','DBVPG6765','L-1528'};
 
 % ANOVA_Query_Strains={'DBVPG1106','L-1374','Bb32','UWOPS87-242.1','YS9'};
 %ANOVA_Query_Strains={'DBVPG1106','L-1374','RM11_1A','UWOPS87_2421','YS9'};
@@ -46,8 +48,8 @@ Strain_names={data_output.strain};
 %
 % ANOVA_Query_Strains={'273614N','YIIc17_E5'}
 %
-%ANOVA_Query_Strains={'YPS163','T7','378604X','UWOPS83_787_3','YPS128','YPS606'}
-%ANOVA_Query_Strains={'YPS163','T7','378604X','UWOPS83_787_3','YPS128','YPS606'}
+ANOVA_Query_Strains={'YPS163','T7','378604X','UWOPS83_787_3','YPS128','YPS606'}
+[p,tbl,stats]=compute_ANOVA(ANOVA_Query_Strains,data_output,Strain_names)
 
 %
 % %SAME ORF but very different promoter?
@@ -61,54 +63,13 @@ Strain_names={data_output.strain};
 %ANOVA_Query_Strains={'Y9combined','Y9'}
 
 
-%% From haplotypes computation 20150622 and PROMOTER + ORF only
+%% From haplotypes PROMOTER + ORF
 
-%ANOVA_Query_Strains={'BC187','DBVPG1788','DBVPG6765','L-1528'};
+ANOVA_Query_Strains={'BC187','DBVPG1788','DBVPG6765','L-1528'};
+[p,tbl,stats]=compute_ANOVA(ANOVA_Query_Strains,data_output,Strain_names)
 
 ANOVA_Query_Strains={'YPS163','T7'};
-
-%%
-counter=1;
-for iStrain=1:length(ANOVA_Query_Strains)
-    
-    try
-        QueryStrains_idx(counter)=find(strcmp(ANOVA_Query_Strains{iStrain},Strain_names));
-        counter=counter+1;
-    catch
-        ANOVA_Query_Strains{iStrain}
-
-    end
-    
-end
+[p,tbl,stats]=compute_ANOVA(ANOVA_Query_Strains,data_output,Strain_names)
 
 
-%%
-
-for iQueryStrain=1:length(QueryStrains_idx)
-    
-    %QueryStrains_matrix{iQueryStrain}=data_output(QueryStrains_idx(iQueryStrain)).values;
-    
-    QueryStrains_size(iQueryStrain)=length(data_output(QueryStrains_idx(iQueryStrain)).values);
-end
-
-
-ANOVA_Rows=max(QueryStrains_size);
-
-ANOVA_Columns=length(QueryStrains_idx);
-
-ANOVA_matrix=nan(ANOVA_Rows,ANOVA_Columns);
-
-for iQueryStrain=1:length(QueryStrains_idx)
-    
-    Values=data_output(QueryStrains_idx(iQueryStrain)).values;
-    
-    for jValues=1:length(Values)
-        
-        ANOVA_matrix(jValues,iQueryStrain)=Values(jValues);
-    end
-    
-    
-end
-
-[p,tbl,stats] =anova1(ANOVA_matrix);
 
