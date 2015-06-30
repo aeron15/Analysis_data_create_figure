@@ -250,6 +250,7 @@ strains={'RYB22';
 %'RYB42'}
 filename='GAL3_HH';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
+save('data_output_figure_GAL3HH','data_output');
 
 [h,p]=ttest2(data_output(2).values,data_output(1).values)
 [h,p]=ttest2(data_output(3).values,data_output(1).values)
@@ -265,6 +266,8 @@ strains={'RYC69';
 };
 filename='SOK1_HH';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
+save('data_output_figure_SOK1HH','data_output');
+
 
 [h,p]=ttest2(data_output(1).values,data_output(3).values)
 [h,p]=ttest2(data_output(2).values,data_output(3).values)
