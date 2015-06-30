@@ -1,4 +1,4 @@
-function NaturalIsolates_correlation=compute_correlation_genetic_distance_set_point_induction(data_output)
+function [NaturalIsolates_correlation,x,QueryStrains_MeanGeneticDistance]=compute_correlation_genetic_distance_set_point_induction(data_output)
 
 %Computes the genetic distance and the set point of induction correlation
 %between pairs of strains
@@ -53,7 +53,6 @@ export_fig(filename, '-pdf','-transparent','-nocrop');
 %%
 
 NaturalIsolates_correlation=nancorr(x,QueryStrains_MeanGeneticDistance);
-
 
 [x1, y]=remove_nan_rows(x,QueryStrains_MeanGeneticDistance');
 

@@ -108,7 +108,6 @@ QueryStrains_counter=determine_strains_in_Cromie();
 Number_of_Groups=T_test_walking(data_output, loc);
 
 % Compute difference between BC187 and YJM978
-
 strain1='BC187'; strain2='YJM978';
 [FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
@@ -126,18 +125,18 @@ strain2='DBVPG1373';
 [FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 %Range of the strains on figure 5
-
 strain1='YJM978'; 
 strain2='CLIB382';
 [FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 
-%% Figure 3
+%% Figure 3. Allele swaps BC187-YJM978
 %strains = {'RY16*', 'RYB53*', 'RYB59*', 'RYB65*', 'RYB66*', 'RYB28*'};
 strains = {'RYB53*', 'RYB59*', 'RYB65*', 'RYB66*'};
 
-filename='Fig_3_allele_swaps_20150609';
+filename='Fig_3_allele_swaps';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
+save('data_output_figure_3','data_output');
 
 %compute_conversion_rate
 
@@ -146,33 +145,27 @@ InterStrain_distance=abs(mean(data_output(2).values)-mean(data_output(3).values)
 data_output(1).values=data_output(1).values([1:3 5]);
 
 YJM978background_differences=abs(mean(data_output(2).values)-mean(data_output(1).values))
-
 BC187background_differences=abs(mean(data_output(3).values)-mean(data_output(4).values));
 
+%Compute percent conversion strains
+YJM978bg_PercentConversion=YJM978background_differences./InterStrain_distance;
+BC187bg_PercentConversion=BC187background_differences./InterStrain_distance;
 
-YJM978background_differences./InterStrain_distance
-BC187background_differences./InterStrain_distance
+%Range of the strains on figure 3
+strain1='GAL3-BC (YJM978)'; 
+strain2='GAL3-YJM (YJM978)';
+[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
-save('data_output_figure_3','data_output');
+%Range of the strains on figure 3
+strain1='GAL3-BC (BC187) '; 
+strain2='GAL3-YJM (BC187) ';
+[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 %% Figure 3 test heterologos locus effect
 strains = {'RY16*', 'RYB53*', 'RYB59*', 'RYB65*', 'RYB66*', 'RYB28*'};
 
 filename='Fig_3_allele_swaps';
 [fig3,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
-
-%compute_conversion_rate
-
-InterStrain_distance=abs(mean(fig3(2).values)-mean(fig3(3).values));
-
-fig3(2).values=fig3(2).values([1:3 5]);
-
-YJM978background_differences=abs(mean(fig3(2).values)-mean(fig3(1).values))
-
-BC187background_differences=abs(mean(fig3(3).values)-mean(fig3(4).values));
-
-YJM978background_differences./InterStrain_distance
-BC187background_differences./InterStrain_distance
 
 BC_het_effect=mean([fig3(4).values;fig3(6).values]);
 YJ_het_effect=mean([fig3(1).values;fig3(3).values]);
@@ -246,6 +239,10 @@ filename='GAL3_HH';
 
 [h,p]=ttest2(data_output(2).values,data_output(1).values)
 [h,p]=ttest2(data_output(3).values,data_output(1).values)
+
+%Mann Whitney U-test
+[p,h,stats] = ranksum(data_output(2).values,data_output(1).values)
+[h,p,stats]=ranksum(data_output(3).values,data_output(1).values)
 
 %%
 strains={'RYC69';
