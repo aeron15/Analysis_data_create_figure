@@ -25,8 +25,7 @@ function compute_setpoints_reference_BC187()
 
 % To plot data look a the script driver_main_figures.m
 
-%% Compute confidence interval
-
+%% Load data
 
 path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_analysis_data/20150623_data/GLU/'
 
@@ -34,35 +33,9 @@ path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_analysis_data/
 
 load([path_data 'setpoints_normalized.mat']);
 
-%Compute the 95% confidence interval for estimate
+%% Filter data using BC187 set points
 
-BC187_vals_vector=cell2mat(setpoints_normalized(:,1));
-
-BC187_mean=nanmean(BC187_vals_vector);
-
-BC187_std=nanstd(BC187_vals_vector);
-
-% Standard deviation and length of the vector
-%SEM = std(x)/sqrt(length(x));  
-BC187_len=sum(~isnan(BC187_vals_vector));
-
-BC187_SEM = BC187_std/sqrt(BC187_len);  
-
-%ts = tinv([0.025  0.975],BC187_len-1);      % T-Score
-
-ts = tinv([0.01  0.99],BC187_len-1);      % T-Score
-
-CI = BC187_mean + ts*BC187_SEM;
-
-%% Compute the 10% above the mean and 10% below the mean and remove bad data
-
-higher_bound= 1.1* BC187_mean;
-lower_bound=0.89 * BC187_mean;
-
-idx_to_remove=~(higher_bound * BC187_mean & BC187_vals_vector < lower_bound);
-setpoints_normalized(idx_to_remove,:)=[];
-
-plot_hist_BC187_vals(BC187_vals_vector,higher_bound,lower_bound)
+setpoints_normalized = filter_SetPointsNormalized(setpoints_normalized);
 
 %% Create variable equivalent to dif_sp.mat from the plot_all_figs_1
 
@@ -102,7 +75,6 @@ average_perc_difference_replicates=compute_percent_difference_between_replicates
 
 save('data_output_figure_glucose_titration','data_output');
 
-
 %% Figure 1. Setpoints of natural isolates
 
 %Removed CLIB215
@@ -128,10 +100,7 @@ filename='Fig_1_natural_isolates';
 save('data_output_figure_1','data_output');
 save('data_output_natural_isolates_glucose_titration','data_output');
 
-% Average standard deviation of natural isolates set point of induction
-average_standard_deviation=compute_average_standard_deviation(data_output);
-
-%Correlation genetic distance and set point of induction
+%Correlation genetic distance and set point of induction using RAD-seq data
 NaturalIsolates_correlation=compute_correlation_genetic_distance_set_point_induction(data_output);
 
 QueryStrains_counter=determine_strains_in_Cromie();
@@ -139,14 +108,16 @@ QueryStrains_counter=determine_strains_in_Cromie();
 Number_of_Groups=T_test_walking(data_output, loc);
 
 % Compute difference between BC187 and YJM978
-
 strain1='BC187'; strain2='YJM978';
 [FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
-%Range of the set points on figure 1
+%Range of the set points on figure 1 (Natural Isolates)
 strain1='YJM421'; 
 strain2='DBVPG1373';
 [FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
+
+% Average standard deviation of natural isolates set point of induction
+NaturalIsolates_AverageStandardDeviation=compute_average_standard_deviation(data_output);
 
 %Range of the natural isolates strains on figure 4
 strain1='YJM421'; 
@@ -154,18 +125,18 @@ strain2='DBVPG1373';
 [FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 %Range of the strains on figure 5
-
 strain1='YJM978'; 
 strain2='CLIB382';
 [FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 
-%% Figure 3
+%% Figure 3. Allele swaps BC187-YJM978
 %strains = {'RY16*', 'RYB53*', 'RYB59*', 'RYB65*', 'RYB66*', 'RYB28*'};
 strains = {'RYB53*', 'RYB59*', 'RYB65*', 'RYB66*'};
 
-filename='Fig_3_allele_swaps_20150609';
+filename='Fig_3_allele_swaps';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
+save('data_output_figure_3','data_output');
 
 %compute_conversion_rate
 
@@ -174,33 +145,27 @@ InterStrain_distance=abs(mean(data_output(2).values)-mean(data_output(3).values)
 data_output(1).values=data_output(1).values([1:3 5]);
 
 YJM978background_differences=abs(mean(data_output(2).values)-mean(data_output(1).values))
-
 BC187background_differences=abs(mean(data_output(3).values)-mean(data_output(4).values));
 
+%Compute percent conversion strains
+YJM978bg_PercentConversion=YJM978background_differences./InterStrain_distance;
+BC187bg_PercentConversion=BC187background_differences./InterStrain_distance;
 
-YJM978background_differences./InterStrain_distance
-BC187background_differences./InterStrain_distance
+%Range of the strains on figure 3
+strain1='GAL3-BC (YJM978)'; 
+strain2='GAL3-YJM (YJM978)';
+[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
-save('data_output_figure_3','data_output');
+%Range of the strains on figure 3
+strain1='GAL3-BC (BC187) '; 
+strain2='GAL3-YJM (BC187) ';
+[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 %% Figure 3 test heterologos locus effect
 strains = {'RY16*', 'RYB53*', 'RYB59*', 'RYB65*', 'RYB66*', 'RYB28*'};
 
 filename='Fig_3_allele_swaps';
 [fig3,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
-
-%compute_conversion_rate
-
-InterStrain_distance=abs(mean(fig3(2).values)-mean(fig3(3).values));
-
-fig3(2).values=fig3(2).values([1:3 5]);
-
-YJM978background_differences=abs(mean(fig3(2).values)-mean(fig3(1).values))
-
-BC187background_differences=abs(mean(fig3(3).values)-mean(fig3(4).values));
-
-YJM978background_differences./InterStrain_distance
-BC187background_differences./InterStrain_distance
 
 BC_het_effect=mean([fig3(4).values;fig3(6).values]);
 YJ_het_effect=mean([fig3(1).values;fig3(3).values]);
@@ -210,7 +175,11 @@ Delta_GAL3=BC_het_effect-YJ_het_effect;
 set_1=[fig3(1).values;fig3(6).values-Delta_GAL3];%haploids
 set_2=[fig3(3).values;fig3(4).values-Delta_GAL3];
 
+%T-TEST 
 [h,p,ci,stats]=ttest2(set_1,set_2);
+
+%MANN-WHITNEY
+[p,h,stats] = ranksum(set_1,set_2);
 
 
 %% Figure 4. Natural Isolate ORF swaps into YJM978 
@@ -256,8 +225,8 @@ strains = {'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*';
 filename='Fig5_BC_YJ';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
-%Determine fold differences between pairs of strains 
-[AlleleReplacementBackgrounds_mean,AlleleReplacementBackgrounds_std]=determine_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)
+%Determine fold differences between pairs of strains
+[AlleleReplacementBackgrounds_mean,AlleleReplacementBackgrounds_std]=compute_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)
 
 %% SI figures. Hemizygous hybrid strains
 close all;
@@ -270,6 +239,10 @@ filename='GAL3_HH';
 
 [h,p]=ttest2(data_output(2).values,data_output(1).values)
 [h,p]=ttest2(data_output(3).values,data_output(1).values)
+
+%Mann Whitney U-test
+[p,h,stats] = ranksum(data_output(2).values,data_output(1).values)
+[h,p,stats]=ranksum(data_output(3).values,data_output(1).values)
 
 %%
 strains={'RYC69';

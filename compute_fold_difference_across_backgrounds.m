@@ -1,4 +1,4 @@
-function [AlleleReplacementBackgrounds_mean,AlleleReplacementBackgrounds_std]=determine_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)
+function [AlleleReplacementBackgrounds_mean,AlleleReplacementBackgrounds_std]=compute_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)
 
 %DETERMINE_FOLD_DIFFERENCE_ACROSS_BACKGROUNDS 
 %This assumes that strains are sorted equally in both Strains BC187 and
@@ -22,9 +22,9 @@ end
 AlleleReplacementBackgrounds_mean=mean(FoldDifference_vector);
 AlleleReplacementBackgrounds_std=std(FoldDifference_vector);
 
-hfig=figure()
+hfig=figure();
 boxplot(FoldDifference_vector)
-title('Distributions between of fold differences between different alleles')
+title('Distributions of fold differences between BC187 and YJM978 GAL3 alleles across strains')
 Set_fig_RE(hfig,9,9,20);
 
 filename='Box_Plot_of_fold differences';
