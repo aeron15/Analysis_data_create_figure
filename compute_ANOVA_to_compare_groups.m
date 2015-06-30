@@ -37,9 +37,9 @@ ANOVA_Query_Strains={'YJM975','YJM978','YJM981'};
 [p,tbl,stats]=compute_ANOVA(ANOVA_Query_Strains,data_output,Strain_names)
 
 
-%ANOVA_Query_Strains={'BC187','DBVPG1373','DBVPG1788','DBVPG6765','L-1528'};
+ANOVA_Query_Strains={'BC187','DBVPG1373','DBVPG1788','DBVPG6765','L-1528'};
 
-% ANOVA_Query_Strains={'DBVPG1106','L-1374','Bb32','UWOPS87-242.1','YS9'};
+%ANOVA_Query_Strains={'DBVPG1106','L-1374','Bb32','UWOPS87-242.1','YS9'};
 %ANOVA_Query_Strains={'DBVPG1106','L-1374','RM11_1A','UWOPS87_2421','YS9'};
 
 %
