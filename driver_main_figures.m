@@ -38,7 +38,7 @@ load('all_strains_vals_vector')
 
 fig4(all_strains_vals_vector, all_strains_names);
 
-%% Printe figure 5
+%% Printe figure 5  
 
 close all;
 load('all_strains_names')

@@ -14,37 +14,13 @@ for iStrain=1:length(loc)-1
     
     h=ttest2(sample1,sample2);
     QueryStrains_ttest_result(iStrain)=h;
-    Number_of_Groups=sum(QueryStrains_ttest_result)+1;
+    Number_of_Groups=sum(QueryStrains_ttest_result)+1;%Number of dividers or 1s is  
 
-    %Use the ones as separators between groups
-    
-%     if h==0
-%         %If the test fails lump together the strains
-%         failed_test(idx_failed_test)=idx;
-%         idx_failed_test=idx_failed_test+1;
-%         
-%     end
-%     
-%     if h==1 %if test rejects null hypothesis
-%         
-%         if exist('failed_test')
-%             
-%             all_strain_cluster{idx_groups}=failed_test;
-%             
-%         else
-%             
-%             all_strain_cluster{idx_groups}=idx;
-%             
-%         end
-%         
-%         idx_groups=idx_groups+1;
-%         idx_failed_test=1;
-%         
-%     end
-%     
-%     
-% end
-% 
-%  all_strain_cluster{idx_groups}=failed_test;
 
+end
+
+Strain_Names={data_output.strain};
+Strain_Names=Strain_Names(loc);
+%Get divider strains
+DiverStrains={Strain_Names{logical(QueryStrains_ttest_result)}};
 end
