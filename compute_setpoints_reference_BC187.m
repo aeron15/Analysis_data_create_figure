@@ -126,7 +126,7 @@ strain2='DBVPG1373';
 
 %Range of the strains on figure 5
 strain1='YJM978'; 
-strain2='CLIB382';
+strain2='I-14';
 [FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 
@@ -203,7 +203,7 @@ save('data_output_figure_4','data_output');
 [Correlation_Coefficient,P_Value]=compute_correlation_natural_isolates_allele_replacements;
 
 
-%% Figure 5 BC
+%% Figure 5 BC187 alleles
 %strains_BC = {'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*'; 'RYD50*'; 'RYD53*'};
 strains_BC = {'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*'};
 
@@ -211,14 +211,28 @@ filename='Fig5_BC';
 [data_output,loc]=make_dot_plot(strains_BC, all_strains_vals_vector, all_strains_names, filename);
 StrainsWithBC187Allele_names={data_output.strain}';
 
-%% Figure 5
+%Range of variation of the allele replacements
+% strain1= 'GAL3-BC (YJM978)'; 
+% strain2= 'GAL3-BC187 (I-14)';
+strain1= data_output(loc(1)).strain; 
+strain2= data_output(loc(end)).strain;
+[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
+
+
+%% Figure 5 YJM978 alleles 
 %strains_YJM = {'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'; 'RYD52*'; 'RYD55*'; 'RYD06*'};
 strains_YJM = {'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'};
 filename='Fig5_YJ_alelle';
 [data_output,loc]=make_dot_plot(strains_YJM, all_strains_vals_vector, all_strains_names, filename);
 StrainsWithYJM978Allele_names={data_output.strain}';
 
+strain1= data_output(loc(1)).strain; 
+strain2= data_output(loc(end)).strain;
+[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
+
+
 %% Figure 5 all allele replacements of YJM978 and BC187
+close all;
 %strains_BC = {'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*';'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'; 'RYD52*'; 'RYD55*'; 'RYD06*'};
 strains = {'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*';'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'};
 
@@ -226,7 +240,7 @@ filename='Fig5_BC_YJ';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
 %Determine fold differences between pairs of strains
-[AlleleReplacementBackgrounds_mean,AlleleReplacementBackgrounds_std]=compute_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)
+[AlleleReplacementBackgrounds_mean,AlleleReplacementBackgrounds_std,AlleleReplacementBackgrounds_sem]=compute_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)
 
 %% SI figures. Hemizygous hybrid strains
 close all;
@@ -236,6 +250,7 @@ strains={'RYB22';
 %'RYB42'}
 filename='GAL3_HH';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
+save('data_output_figure_GAL3HH','data_output');
 
 [h,p]=ttest2(data_output(2).values,data_output(1).values)
 [h,p]=ttest2(data_output(3).values,data_output(1).values)
@@ -251,6 +266,8 @@ strains={'RYC69';
 };
 filename='SOK1_HH';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
+save('data_output_figure_SOK1HH','data_output');
+
 
 [h,p]=ttest2(data_output(1).values,data_output(3).values)
 [h,p]=ttest2(data_output(2).values,data_output(3).values)

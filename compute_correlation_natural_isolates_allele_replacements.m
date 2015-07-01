@@ -49,7 +49,7 @@ for iStrain=1:length(AlleleReplacement_names)
     end
 end
 %% PLOT correlation plot
-hfig=figure;
+hfig=figure('Position',[440   576   280   222]);
 hold all;
 
 x=x1(:,1);
@@ -61,22 +61,20 @@ ylim([-9 -3 ])
 
 [fittedX, fittedY]=compute_fit(x,y);
 hold on;
-plot(fittedX, fittedY, 'r-', 'LineWidth', 3,'MarkerSize',15);
-
+plot(fittedX, fittedY, 'r-', 'LineWidth', 2,'MarkerSize',15);
 
 xlabel('Allele replacement set point')
 ylabel('Natural isolate set point')
-Set_fig_RE(hfig,9,9,20)
-
-
-
-[R,P]=corrcoef(x1(:,1),x1(:,2));
-
-
-Correlation_Coefficient=R(1,2);
-P_Value=P(1,2);
+Set_fig_RE(hfig,9,9,9)
 axis square;
 
 filename=('correlation_natural_isolates_allele_swaps')
+
 export_fig(filename,'-pdf',  '-transparent', '-nocrop')
 %% 
+
+[R,P]=corrcoef(x1(:,1),x1(:,2));
+
+Correlation_Coefficient=R(1,2);
+P_Value=P(1,2);
+

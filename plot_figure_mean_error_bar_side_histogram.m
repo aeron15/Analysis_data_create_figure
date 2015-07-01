@@ -38,7 +38,7 @@ PercentBetweenPerc25Perc75=sum(perc25<mean_data & mean_data<perc75)./length(mean
 
 namesStrains={data_output.strain};
 
-hfig=figure('Position',[ 328   198   865   397]);
+hfig=figure('Position',[328   269   804   326]);
 hold all;
 positionVector1 = [0.1, 0.1, 0.6, 0.8];
 subplot('Position',positionVector1)
