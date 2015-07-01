@@ -8,8 +8,10 @@ Strain_names={data_output.strain};
 %YJM975,YJM978, YJM981
 %QueryStrains_idx=[30:32];
 
-%YOS128,YPS163,YPS606
-%QueryStrains_idx=[34:36];
+%YPS128,YPS163,YPS606
+ANOVA_Query_Strains={'YPS128','YPS163','YPS606'};
+[p,tbl,stats]=compute_ANOVA(ANOVA_Query_Strains,data_output,Strain_names)
+
 
 %Find indeces of matching strains
 % ANOVA_Query_Strains={'DBVPG1373';
