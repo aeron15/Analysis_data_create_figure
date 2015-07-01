@@ -27,10 +27,14 @@ CI = BC187_mean + ts*BC187_SEM;
 higher_bound= 1.1* BC187_mean;
 lower_bound=0.89 * BC187_mean;
 
-idx_to_remove=~(higher_bound * BC187_mean & BC187_vals_vector < lower_bound);
+idx_to_remove=~(BC187_vals_vector > higher_bound & BC187_vals_vector < lower_bound);
+
+%Cases to be removed
+%setpoints_normalized(idx_to_remove,:)
+
 setpoints_normalized(idx_to_remove,:)=[];
 %% Plot filtered data (Check if the plot is done for galactose or glucose titrations)
 
-%plot_hist_BC187_vals(BC187_vals_vector,higher_bound,lower_bound)
+plot_hist_BC187_vals(BC187_vals_vector,higher_bound,lower_bound)
 
 end
