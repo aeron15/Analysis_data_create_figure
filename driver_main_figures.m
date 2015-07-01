@@ -31,17 +31,17 @@ load data_output_figure_SOK1HH.mat
 plot_figure_mean_error_bar(data_output,'file_append','figureSOK1HH','figure_size','HH')
 
 
-%% Print figure 5
+%% Print figure 4
 close all;
 load('all_strains_names')
 load('all_strains_vals_vector')
 
+fig4(all_strains_vals_vector, all_strains_names);
+
+%% Printe figure 5  
+
+close all;
+load('all_strains_names')
+load('all_strains_vals_vector')
 fig5(all_strains_vals_vector, all_strains_names);
-
-%% Printe figure 6
-
-close all;
-load('all_strains_names')
-load('all_strains_vals_vector')
-fig6(all_strains_vals_vector, all_strains_names);
 

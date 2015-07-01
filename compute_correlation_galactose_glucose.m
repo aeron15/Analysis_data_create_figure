@@ -56,7 +56,6 @@ plot(QueryStrain_SetPointGalactose,QueryStrain_SetPointGlucose,'.','MarkerSize',
 [fittedX, fittedY]=compute_fit(QueryStrain_SetPointGalactose,QueryStrain_SetPointGlucose);
 plot(fittedX, fittedY, 'r-', 'LineWidth', 3,'MarkerSize',15)
 
-
 xlabel('Galactose set point')
 ylabel('Glucose set point')
 title({'Correlation of glucose and galactose set point of induction';[ num2str(length(QueryStrain_SetPointGalactose)) ' between natural isolates for strains']})

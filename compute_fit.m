@@ -12,5 +12,5 @@ y=matrix(:,2);
 %%
 coeffs = polyfit(x, y, 1);
 % Get fitted values
-fittedX = linspace(min(x)-10, max(x)+10, 200);
+fittedX = linspace(min(x)-1, max(x)+1, 200);
 fittedY = polyval(coeffs, fittedX);
