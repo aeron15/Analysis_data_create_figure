@@ -22,5 +22,5 @@ end
 Strain_Names={data_output.strain};
 Strain_Names=Strain_Names(loc);
 %Get divider strains
-DiverStrains={Strain_Names{logical(QueryStrains_ttest_result)}};
+%DividerStrains={Strain_Names{logical(QueryStrains_ttest_result)}};
 end
