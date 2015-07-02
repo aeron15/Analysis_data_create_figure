@@ -59,21 +59,22 @@ plot(x,y,'.','MarkerSize',14);
 xlim([-9 -3 ])
 ylim([-9 -3 ])
 
-% [fittedX, fittedY]=compute_fit(x,y);
-% hold on;
-% plot(fittedX, fittedY, 'r-', 'LineWidth', 2,'MarkerSize',15);
+[fittedX, fittedY]=compute_fit(x',y');
+hold on;
+plot(fittedX, fittedY, 'r-', 'LineWidth', 2,'MarkerSize',15);
 
 xlabel('Allele replacement set point')
 ylabel('Natural isolate set point')
 Set_fig_RE(hfig,9,9,9)
 axis square;
 
+%%
 filename=('correlation_natural_isolates_allele_swaps')
-
 export_fig(filename,'-pdf',  '-transparent', '-nocrop')
-%% 
+%%
+[x, y]=remove_nan_rows(x1(:,1)',x1(:,2)');
 
-[R,P]=corrcoef(x1(:,1),x1(:,2));
+[R,P]=corrcoef(x,y);
 %[R,P]=nancorr(x1(:,1),x1(:,2));
 Correlation_Coefficient=nancorr(x1(:,1),x1(:,2))
 %Correlation_Coefficient=R(1,2);
