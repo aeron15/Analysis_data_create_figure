@@ -1,6 +1,7 @@
-function plot_compute_meiotic_segregants()
+function [YJM978_like, BC187_like]=plot_compute_meiotic_segregants()
 
 % PLOT_COMPUTE_MEIOTIC_SEGREGATNS plots meoitic segregant data
+% returns counts of BC187 like and YJM978
 %Inspired by compute_plates_hists_backup in the same path
 
 path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_facs/20120427_meiotic_segregant_classification/output/';
@@ -185,6 +186,7 @@ Set_fig_RE(hfig,9,9,20)
 
 YJM978_like=sum(N(1:6))+N(7)./2;
 BC187_like=N(7)./2+sum(N(8:end));
+
 
 %% Compute chi-square statistic
 

@@ -14,7 +14,7 @@ counter=1;
 for iStrain=1:length(strains)
     
     for jStrain=iStrain+1:length(strains)%Makes fewer computations
-    %for jStrain=iStrain:length(strains)    
+
         Strain1_mean_setpoint=nanmean(data_output(iStrain).values);
         Strain2_mean_setpoint=nanmean(data_output(jStrain).values);
         
@@ -31,7 +31,7 @@ for iStrain=1:length(strains)
     end
     
 end
-
+display('done')
 %Plot correlation
 %Average the distance for the cases where there is more than one distance
 %computed
