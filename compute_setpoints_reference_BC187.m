@@ -71,8 +71,6 @@ filename='All_data';
 
 AllData_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
 
-%average_perc_difference_replicates=compute_percent_difference_between_replicates(data_output);
-
 save('data_output_figure_glucose_titration','data_output');
 
 
@@ -109,7 +107,6 @@ NaturalIsolates_correlation=compute_correlation_genetic_distance_set_point_induc
 
 %Highlight specific points of the data
 %plot_correlation_highlight_points()
-
 
 QueryStrains_counter=determine_strains_in_Cromie();
 
