@@ -28,15 +28,9 @@ function compute_setpoints_reference_BC187()
 %% Load data
 
 path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_analysis_data/20150623_data/GLU_RYB23/'
-
-%path_data='20150623_data/GLU/'
-
 load([path_data 'setpoints_normalized.mat']);
 
-%% Filter data using BC187 set points
-%setpoints_normalized = filter_SetPointsNormalized(setpoints_normalized);
-
-%% Filter data using a filtering on all the data in the paper
+%% Filter data using 2 standard deviations from the median reference BC187 value
 setpoints_normalized=filterData_onlyforNaturalIsolates(setpoints_normalized);
 
 %% Create variable equivalent to dif_sp.mat from the plot_all_figs_1
@@ -77,7 +71,7 @@ filename='All_data';
 
 AllData_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
 
-average_perc_difference_replicates=compute_percent_difference_between_replicates(data_output);
+%average_perc_difference_replicates=compute_percent_difference_between_replicates(data_output);
 
 save('data_output_figure_glucose_titration','data_output');
 
