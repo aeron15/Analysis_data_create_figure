@@ -113,6 +113,10 @@ Number_of_Groups_Natural_Isolates=T_test_walking(data_output, loc);
 %Correlation genetic distance and set point of induction using RAD-seq data
 NaturalIsolates_correlation=compute_correlation_genetic_distance_set_point_induction(data_output,loc);
 
+%Highlight specific points of the data
+%plot_correlation_highlight_points()
+
+
 QueryStrains_counter=determine_strains_in_Cromie();
 
 % Compute difference between BC187 and YJM978
