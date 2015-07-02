@@ -6,7 +6,9 @@ load('data_output_figure_1');
 Strain_names={data_output.strain};
 
 %YJM975,YJM978, YJM981
-%QueryStrains_idx=[30:32];
+%QueryStrains_idx=[30:32]
+ANOVA_Query_Strains={'YJM975','YJM978', 'YJM981'};
+[p,tbl,stats]=compute_ANOVA(ANOVA_Query_Strains,data_output,Strain_names)
 
 %YPS128,YPS163,YPS606
 ANOVA_Query_Strains={'YPS128','YPS163','YPS606'};
@@ -30,7 +32,6 @@ ANOVA_Query_Strains={'YPS128','YPS163','YPS606'};
 
 %Find indeces of matching strains
 %Sake_strains={'UC5';'Y12-SGRP';'Y12-WashU';'Y9-WashU'};
-
 %ANOVA_Query_Strains={'UC5';'Y12-SGRP';'Y12-WashU';'Y9-WashU'}
 
 %% From haplotypes ORF only

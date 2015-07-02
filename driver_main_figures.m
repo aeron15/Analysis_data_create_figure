@@ -15,11 +15,11 @@ load data_output_figure_4.mat
 plot_figure_mean_error_bar(data_output,'file_append','figure4')
 
 %% Print figure 6
-load('all_strains_names')
-load('all_strains_vals_vector')
-
-fig5(all_strains_vals_vector, all_strains_names);
-fig6(all_strains_vals_vector, all_strains_names);
+% load('all_strains_names')
+% load('all_strains_vals_vector')
+% 
+% fig5(all_strains_vals_vector, all_strains_names);
+% fig6(all_strains_vals_vector, all_strains_names);
 %% Print GAL3 hemizygous hybrid
 
 load data_output_figure_GAL3HH.mat

@@ -34,8 +34,10 @@ path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_analysis_data/
 load([path_data 'setpoints_normalized.mat']);
 
 %% Filter data using BC187 set points
+%setpoints_normalized = filter_SetPointsNormalized(setpoints_normalized);
 
-setpoints_normalized = filter_SetPointsNormalized(setpoints_normalized);
+%% Filter data using a filtering on all the data in the paper
+filterData_onlyforNaturalIsolates(setpoints_normalized)
 
 %% Create variable equivalent to dif_sp.mat from the plot_all_figs_1
 
@@ -47,37 +49,38 @@ save('all_strains_names','all_strains_names');
 
 %% Setpoints of all strains in study
 
-all_strains  = {'Y55*'; 'NCYC110*'; 'L_1528*'; 'DBVPG6044*';
-    'Y12_SGRP*'; 'W303*'; 'i378604X*'; 'DBVPG1373*';
-    'YIIc17_E5*'; 'UWOPS87_2421*'; 'YPS163*'; 'CLIB215*';
-    'CLIB324*'; 'NC_02*'; 'PW5*'; 'YS4*'; 
-    'T7*'; 'Y9_WashU*'; 'UWOPS03_4614*'; 'IL_01*';
-    'M22*'; 'DBVPG6765*'; 'YPS128*'; 'DBVPG1788*'; 
-    'DBVPG1853*'; 'L_1374*'; 'DBVPG1106*'; 'YJM421*';
-    'Bb32*'; 'YJM428*'; 'UWOPS05_2272*'; 'DBVPG6040*';
-    'YJM653*'; 'UC5*'; 'YPS1009*'; 'CLIB382*';
-    'WE372*'; 'YJM975*'; 'I_14*'; 'YJM981*';
-    'Y12_WashU*'; 'FL100*'; 'i273614N*'; 'YPS606*';
-    'BC187*'; 'YJM978*'; 'S288C*';'RY16*'; 'RYB53*'; 'RYB59*'; 'RYB65*'; 'RYB66*'; 'RYB28*';
-    'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*';
-    'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'; 'RYD52*'; 'RYD55*'; 'RYD06*';
-    'RYC45*';'RYC58*';'RYC49*'; 'RYC50*';'RYC51*'; 'RYC59_1*';'RYC52*';'RYC60*';'RYC62*'; 'RYB92*'; 'RYC72*'; 
-    'RYD25*'; 'RYD27*'; 'RYD28*'; 'RYD30*'; 'RYD31*'; 'RYB59*'; 'RYB53*'};
-
-rm_strains = {'YIIc17_E5*'; 'i273614N*'; 'i378604X*'; 'YS4*'; 'NCYC110*'; 'Y55*'; 'PW5*'; 'DBVPG6044*'; 'W303*'; 'UWOPS05_2272*'};
-
-strains = setdiff(all_strains, rm_strains);
-filename='All_data';
-
-[data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
-
-%Compute coefficient of variation across all the paper
-
-AllData_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
-
-average_perc_difference_replicates=compute_percent_difference_between_replicates(data_output);
-
-save('data_output_figure_glucose_titration','data_output');
+% all_strains  = {'Y55*'; 'NCYC110*'; 'L_1528*'; 'DBVPG6044*';
+%     'Y12_SGRP*'; 'W303*'; 'i378604X*'; 'DBVPG1373*';
+%     'YIIc17_E5*'; 'UWOPS87_2421*'; 'YPS163*'; 'CLIB215*';
+%     'CLIB324*'; 'NC_02*'; 'PW5*'; 'YS4*'; 
+%     'T7*'; 'Y9_WashU*'; 'UWOPS03_4614*'; 'IL_01*';
+%     'M22*'; 'DBVPG6765*'; 'YPS128*'; 'DBVPG1788*'; 
+%     'DBVPG1853*'; 'L_1374*'; 'DBVPG1106*'; 'YJM421*';
+%     'Bb32*'; 'YJM428*'; 'UWOPS05_2272*'; 'DBVPG6040*';
+%     'YJM653*'; 'UC5*'; 'YPS1009*'; 'CLIB382*';
+%     'WE372*'; 'YJM975*'; 'I_14*'; 'YJM981*';
+%     'Y12_WashU*'; 'FL100*'; 'i273614N*'; 'YPS606*';
+%     'BC187*'; 'YJM978*'; 'S288C*';'RY16*'; 'RYB53*'; 'RYB59*'; 'RYB65*'; 'RYB66*'; 'RYB28*';
+%     'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*';
+%     'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'; 'RYD52*'; 'RYD55*'; 'RYD06*';
+%     'RYC45*';'RYC58*';'RYC49*'; 'RYC50*';'RYC51*'; 'RYC59_1*';'RYC52*';'RYC60*';'RYC62*'; 'RYB92*'; 'RYC72*'; 
+%     'RYD25*'; 'RYD27*'; 'RYD28*'; 'RYD30*'; 'RYD31*'; 'RYB59*'; 'RYB53*'};
+% 
+% rm_strains = {'YIIc17_E5*'; 'i273614N*'; 'i378604X*'; 'YS4*'; 'NCYC110*'; 'Y55*'; 'PW5*'; 'DBVPG6044*'; 'W303*'; 'UWOPS05_2272*'};
+% 
+% strains = setdiff(all_strains, rm_strains);
+% filename='All_data';
+% 
+% [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
+% 
+% %Compute coefficient of variation across all the paper
+% 
+% AllData_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
+% 
+% average_perc_difference_replicates=compute_percent_difference_between_replicates(data_output);
+% 
+% save('data_output_figure_glucose_titration','data_output');
+%
 
 %% Figure 1. Setpoints of natural isolates
 
