@@ -37,7 +37,7 @@ load([path_data 'setpoints_normalized.mat']);
 %setpoints_normalized = filter_SetPointsNormalized(setpoints_normalized);
 
 %% Filter data using a filtering on all the data in the paper
-filterData_onlyforNaturalIsolates(setpoints_normalized)
+setpoints_normalized=filterData_onlyforNaturalIsolates(setpoints_normalized);
 
 %% Create variable equivalent to dif_sp.mat from the plot_all_figs_1
 
