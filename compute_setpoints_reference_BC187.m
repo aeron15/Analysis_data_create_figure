@@ -71,6 +71,10 @@ filename='All_data';
 
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
+%Compute coefficient of variation across all the paper
+
+AllData_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
+
 average_perc_difference_replicates=compute_percent_difference_between_replicates(data_output);
 
 save('data_output_figure_glucose_titration','data_output');
@@ -119,6 +123,9 @@ strain2='DBVPG1373';
 
 % Average standard deviation of natural isolates set point of induction
 NaturalIsolates_AverageStandardDeviation=compute_average_standard_deviation(data_output);
+
+% Average standard deviation of natural isolates set point of induction
+NaturalIsolates_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
 
 %Range of the natural isolates strains on figure 4
 strain1='YJM421'; 
@@ -187,7 +194,7 @@ set_2=[fig3(3).values;fig3(4).values-Delta_GAL3];
 
 %strains = {'RYC45*','RYC58*','RYC49*', 'RYC50*','RYC51*', 'RYC59_1*','RYC52*','RYC60*','RYC62*', 'RYB92*', 'RYC72*','RYD27*', 'RYD28*', 'RYD30*', 'RYD31*', 'RYB59*', 'RYB53*'};
 strains = {'RYC45*','RYC58*','RYC49*', 'RYC50*','RYC51*', 'RYC59_1*','RYC52*','RYC60*','RYC62*', 'RYB92*', 'RYC72*', 'RYD25*', 'RYD27*', 'RYD28*', 'RYD30*', 'RYD31*', 'RYB59*', 'RYB53*'};
-
+%Remove RYB92 which is the S288C allele
 filename='Fig_4_YJ_bg_Diff_alleles';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 Number_of_Groups_Allele_replacements=T_test_walking(data_output, loc);
@@ -203,7 +210,7 @@ save('data_output_figure_4','data_output');
 %replacements
 
 %Need to fix data
-[Correlation_Coefficient,P_Value]=compute_correlation_natural_isolates_allele_replacements;
+[NaturalIsolatesSwaps_CorrelationCoefficient,NaturalIsolatesSwaps_PValueCorrelation]=compute_correlation_natural_isolates_allele_replacements;
 
 
 %% Figure 5 BC187 alleles
@@ -255,12 +262,12 @@ filename='GAL3_HH';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 save('data_output_figure_GAL3HH','data_output');
 
-[h,p]=ttest2(data_output(2).values,data_output(1).values)
-[h,p]=ttest2(data_output(3).values,data_output(1).values)
+[GAL3YJHH_h,GAL3YJHH_p]=ttest2(data_output(2).values,data_output(1).values);
+[GAL3BCHH_h,GAL3BCHH_h_p]=ttest2(data_output(3).values,data_output(1).values);
 
-%Mann Whitney U-test
-[p,h,stats] = ranksum(data_output(2).values,data_output(1).values)
-[h,p,stats]=ranksum(data_output(3).values,data_output(1).values)
+%Mann Whitney U-test (%Check syntax)
+%[p,h,stats] = ranksum(data_output(2).values,data_output(1).values)
+%[h,p,stats]=ranksum(data_output(3).values,data_output(1).values)
 
 %%
 strains={'RYC69';
@@ -271,10 +278,9 @@ filename='SOK1_HH';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 save('data_output_figure_SOK1HH','data_output');
 
-[h,p]=ttest2(data_output(1).values,data_output(3).values)
-[h,p]=ttest2(data_output(2).values,data_output(3).values)
+[SOK1BC_h1,SOK1BC_p1]=ttest2(data_output(1).values,data_output(3).values);
+[SOK1YJ_h2,SOK1YJ_p2]=ttest2(data_output(2).values,data_output(3).values);
 
-display('done')
 
 
 

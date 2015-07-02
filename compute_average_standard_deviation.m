@@ -13,7 +13,7 @@ for iData_Output=1:length(data_output)
     
 end
 
-average_standard_deviation=nanstd(standard_deviation_vector);
+average_standard_deviation=nanmean(standard_deviation_vector);
 
 end
 
