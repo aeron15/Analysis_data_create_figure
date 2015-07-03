@@ -44,7 +44,7 @@ for iStrain = 1:length(strains_new)
     end
     plot(iStrain,sp_mean,'ok','MarkerSize',10,'MarkerFaceColor',[0.5 0.5 0.5]);
     hold all;
-    plot(iStrain,nanmean(sp_mean),'ok','MarkerSize',10,'MarkerFaceColor',rgb('DarkOrange'));
+    plot(iStrain,nanmean(sp_mean),'ok','MarkerSize',10,'MarkerFaceColor',[1.0000    0.5469         0]);
     
 end
 

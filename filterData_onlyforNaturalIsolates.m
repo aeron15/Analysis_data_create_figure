@@ -54,6 +54,9 @@ idx_to_remove=(BC187_vals_vector<higher_bound | BC187_vals_vector>lower_bound);
 % 
 setpoints_normalized(idx_to_remove,:)=[];
 
+%% Remove instances where there is only one replicate of the data
+
+
 %%
 plot_hist_BC187_vals(BC187_vals_vector,higher_bound,lower_bound)
 
