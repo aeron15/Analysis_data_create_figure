@@ -9,7 +9,6 @@ plot_figure_mean_error_bar_side_histogram(data_output,'file_append','figure1')
 %Correlation genetic distance and set point of induction using RAD-seq data
 NaturalIsolates_correlation=compute_correlation_genetic_distance_set_point_induction(data_output,loc);
 
-
 %%
 load data_output_figure_3.mat
 plot_figure_mean_error_bar(data_output,'file_append','figure3','figure_size','AlleleReplacement')
@@ -22,26 +21,25 @@ plot_figure_mean_error_bar(data_output,'file_append','figure4')
 %replacements
 [NaturalIsolatesSwaps_CorrelationCoefficient,NaturalIsolatesSwaps_PValueCorrelation]=compute_correlation_natural_isolates_allele_replacements;
 
+%% Make GAL3 hemizygous hybrid
 
-% %% Print GAL3 hemizygous hybrid
-% 
-% load data_output_figure_GAL3HH.mat
-% plot_figure_mean_error_bar(data_output,'file_append','figureGAL3HH','figure_size','HH')
-% 
-% %% Print SOK1 hemizygous hybrid
-% 
-% load data_output_figure_SOK1HH.mat
-% plot_figure_mean_error_bar(data_output,'file_append','figureSOK1HH','figure_size','HH')
+load data_output_figure_GAL3HH.mat
+plot_figure_mean_error_bar(data_output,'file_append','figureGAL3HH','figure_size','HH')
+
+%% Make SOK1 hemizygous hybrid
+
+load data_output_figure_SOK1HH.mat
+plot_figure_mean_error_bar(data_output,'file_append','figureSOK1HH','figure_size','HH')
 
 
-%% Print figure 4
+%% Make figure 4
 close all;
 load('all_strains_names')
 load('all_strains_vals_vector')
 
 fig4(all_strains_vals_vector, all_strains_names);
 
-%% Printe figure 5  
+%% Make figure 5  
 
 close all;
 load('all_strains_names')

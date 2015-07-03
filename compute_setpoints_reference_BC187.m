@@ -3,26 +3,6 @@ function compute_setpoints_reference_BC187()
 %COMPUTE_SETPOINTS_REFERENCE_BC187
 
 %Input should be the set points normalized in data
-%Compute confidence interval for the true value of the set point of BC187
-%Only keep measurements that fall in that interval
-
-%Replot figure 1, with replicates
-
-%I would like to see a comparison between of the
-%relative setpoint (difference between setpoints) and then get the actual
-%setpoint (perhaps look at rankings), but this is not necessary
-
-%This should be a function that takes the mean of the replicates per
-%strain and classifies strains based on tahat
-%Perform a statistical test of different categories,that is, perform t test
-%in order when the t test fails to rejec the null hypothesis that defines a
-%new group
-
-
-%This type of normalization has the advantage that it uses a more natural y
-%axis. Also, it might solve some of the issues with the variability across
-%experiments on figure 3 ( the comparison of allele swaps).
-
 % To plot data look a the script driver_main_figures.m
 
 %% Load data
