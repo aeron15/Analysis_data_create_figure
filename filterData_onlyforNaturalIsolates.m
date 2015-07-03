@@ -57,7 +57,7 @@ setpoints_normalized(idx_to_remove,:)=[];
 
 %% Remove instances where there is only one replicate of the data
 strains_names=setpoints_normalized(:,3);
-strain_nameConversion=strain_name_conv(strains_names)';%From names in the data
+strain_nameConversion=short_strain_name(strains_names)';%From names in the data
 strainsPaper_names=unique(strain_nameConversion);%This are unique identifiers used for labels in the paper
 
 %Identify unique
@@ -74,6 +74,11 @@ for iStrain=1:length(strain_nameConversion)
     
 end
 
+
+
+    
+
+strainsOneReplicate_number=length(StrainsOneReplicate_idx);
 %Remove strains with one replicate
 setpoints_normalized(StrainsOneReplicate_idx,:)=[];
 
