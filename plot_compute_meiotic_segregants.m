@@ -1,8 +1,7 @@
-function [YJM978_like, BC187_like]=plot_compute_meiotic_segregants()
+function meioitic_segregants=plot_compute_meiotic_segregants()
 
 % PLOT_COMPUTE_MEIOTIC_SEGREGATNS plots meoitic segregant data
-% returns counts of BC187 like and YJM978
-%Inspired by compute_plates_hists_backup in the same path
+% returns counts of BC187 like and YJM978. Computes mean and area metric.
 
 path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_facs/20120427_meiotic_segregant_classification/output/';
 
@@ -22,6 +21,8 @@ n_min_events=10;
 counts=1;
 counter=1;
 counter_4=1;
+
+%Import off peak distribution
 
 % Check that all the fields are the same for all the plates to be combined
 

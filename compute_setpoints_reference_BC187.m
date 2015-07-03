@@ -95,7 +95,7 @@ add_entry_log('Correlation between genetic distance and set point difference', N
 %reference
 %plot_correlation_highlight_points()
 
-QueryStrains_counter=determine_strains_in_Cromie();
+%QueryStrains_counter=determine_strains_in_Cromie();
 
 % Compute difference between BC187 and YJM978
 strain1='BC187'; strain2='YJM978';
@@ -143,6 +143,8 @@ BC187background_differences=abs(mean(data_output(3).values)-mean(data_output(4).
 %Compute percent conversion strains
 YJM978bg_PercentConversion=YJM978background_differences./InterStrain_distance;
 BC187bg_PercentConversion=BC187background_differences./InterStrain_distance;
+add_entry_log('Conversion in the YJM978 background', NaturalIsolates_correlation);
+add_entry_log('Conversion in the YJM978 background', NaturalIsolates_correlation);
 
 %Range of the strains on figure 3
 strain1='GAL3-BC (YJM978)';
