@@ -203,6 +203,6 @@ BC187_like=N(7)./2+sum(N(8:end));
 
 %%
 filename=['Distribution of meiotic segregants.pdf'];
-export_fig(filename,'-pdf',  '-transparent', '-nocrop')
+export_fig_specific_path(filename,'-pdf',  '-transparent', '-nocrop')
 
 end

@@ -27,8 +27,7 @@ function compute_setpoints_reference_BC187()
 
 %% Load data
 
-path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_analysis_data/20150623_data/GLU_area/'
-load([path_data 'setpoints_normalized_area.mat']);
+load(['../data/setpoints_normalized_area.mat']);
 
 %% Filter data using 2 standard deviations from the median reference BC187 value
 setpoints_normalized=filterData_onlyforNaturalIsolates(setpoints_normalized);
