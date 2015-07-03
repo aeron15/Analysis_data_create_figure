@@ -48,7 +48,7 @@ end
 
 hold all;
 
-ylim([-9 -3])
+set_yaxis() 
 xticklabel_rotate(1:length(data_output),45,namesStrains(idx));
 
 set(gca,'box','off')

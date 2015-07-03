@@ -51,7 +51,7 @@ xlim([0 length(lab)+1]);
 xticklabel_rotate([1:length(lab)],45,lab(loc),'interpreter','tex');
 
 Set_fig_RE(k,9,9,9);
-ylim([-9 -3]);
+set_yaxis() ;
 
 filename = ['fig4_sorted_swaps.pdf'];
 export_fig_specific_path(filename, '-pdf','-transparent','-nocrop');

@@ -72,8 +72,8 @@ hold all;
 plot([-9 -3],[-9 -3],'k');
 
 
-xlim([-9 -3 ])
-ylim([-9 -3 ])
+set_xaxis() 
+set_yaxis() 
 axis square;
 
 xlabel('Allele replacement set point')

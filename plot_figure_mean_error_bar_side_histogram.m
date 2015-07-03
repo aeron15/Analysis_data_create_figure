@@ -43,7 +43,7 @@ hold all;
 positionVector1 = [0.1, 0.1, 0.6, 0.8];
 subplot('Position',positionVector1)
 errorbar(meanDataSorted,standard_error(idx),'ok','MarkerFaceColor',[0.5 0.5 0.5],'MarkerSize',8)
-ylim([-9 -3])
+set_yaxis() 
 hline(medianDataSort,'k')
 hline(perc75)
 hline(perc25)
@@ -58,7 +58,7 @@ set(p1,'FaceColor',[0.5 0.5 0.5]);
 set(gca,'ytick',[])
 set(gca,'yticklabel',[])
 xlim([0 15])
-ylim([-9 -3])
+set_yaxis() 
 
 Set_fig_RE(hfig,9,9,20)
 
