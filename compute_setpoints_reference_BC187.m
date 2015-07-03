@@ -99,8 +99,8 @@ strain1='BC187'; strain2='YJM978';
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 %Range of the set points on figure 1 (Natural Isolates)
-strain1='YJM421';
-strain2='YPS1009';
+strain1= data_output(loc(1)).strain;
+strain2= data_output(loc(end)).strain;
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 % Average standard deviation of natural isolates set point of induction
@@ -118,10 +118,6 @@ strain2='DBVPG1373';
 strain1='YJM978';
 strain2='I-14';
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
-
-
-
-
 
 
 %% Figure 3. Allele swaps BC187-YJM978
@@ -172,9 +168,8 @@ set_2=[fig3(3).values;fig3(4).values-Delta_GAL3];
 %T-TEST
 [h,p,ci,stats]=ttest2(set_1,set_2);
 
-%MANN-WHITNEY
-[p,h,stats] = ranksum(set_1,set_2);
-
+%>>>>LOG ENTRY
+add_entry_log('Heterologous locus effect T-test result', p);
 
 %% Figure 4. Natural Isolate ORF swaps into YJM978
 
@@ -183,18 +178,24 @@ strains = {'RYC45*','RYC58*','RYC49*', 'RYC50*','RYC51*', 'RYC59_1*','RYC52*','R
 %Remove RYB92 which is the S288C allele
 filename='Fig_4_YJ_bg_Diff_alleles';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
-Number_of_Groups_Allele_replacements=T_test_walking(data_output, loc);
+save('data_output_figure_4','data_output');
 
 %Range of variation of the allele replacements
 strain1= data_output(loc(1)).strain;
 strain2= data_output(loc(end)).strain;
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
 
-save('data_output_figure_4','data_output');
+%>>>>LOG ENTRY
+add_entry_log('Range variation Allele Swaps Figure 4 background YJM978', FoldDifferenceMean);
+add_entry_log('Error range of variation fold Difference', ErrorFoldDifference);
+
+
 
 %Compute correlation coefficient between natural isolates and allele
 %replacements
 [NaturalIsolatesSwaps_CorrelationCoefficient,NaturalIsolatesSwaps_PValueCorrelation]=compute_correlation_natural_isolates_allele_replacements;
+add_entry_log('Correlation natural isoaltes and allele swaps', ErrorFoldDifference);
+add_entry_log('P-value Correlation natural isoaltes and allele swaps', NaturalIsolatesSwaps_PValueCorrelation);
 
 
 %% Figure 5 BC187 alleles
