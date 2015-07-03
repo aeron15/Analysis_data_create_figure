@@ -73,10 +73,15 @@ for iStrain=1:length(strain_nameConversion)
     end
     
 end
+%% Count number of replicates
 
-
-
+for iStrain=1:length(strainsPaper_names)
     
+    replicate_number=sum(strcmp(strainsPaper_names{iStrain},strain_nameConversion));%identify the number of replicates for that strain
+    strainsPaper_totalReplicates{iStrain,1}=strainsPaper_names{iStrain};
+    strainsPaper_totalReplicates{iStrain,2}=replicate_number;
+    
+end
 
 strainsOneReplicate_number=length(StrainsOneReplicate_idx);
 %Remove strains with one replicate
