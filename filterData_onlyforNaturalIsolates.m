@@ -52,10 +52,30 @@ idx_to_remove=(BC187_vals_vector<higher_bound | BC187_vals_vector>lower_bound);
 % %Cases to be removed
 % %setpoints_normalized(idx_to_remove,:)
 % 
+removedStrains_number=sum(idx_to_remove);
 setpoints_normalized(idx_to_remove,:)=[];
 
 %% Remove instances where there is only one replicate of the data
+strains_names=setpoints_normalized(:,3);
+strain_nameConversion=strain_name_conv(strains_names)';%From names in the data
+strainsPaper_names=unique(strain_nameConversion);%This are unique identifiers used for labels in the paper
 
+%Identify unique
+strainsOneReplicate_counter=1;
+
+for iStrain=1:length(strain_nameConversion)
+    
+    replicate_number=sum(strcmp(strain_nameConversion{iStrain},strain_nameConversion));%identify the number of replicates for that strain
+    
+    if replicate_number ==1%save idx for removal
+        StrainsOneReplicate_idx(strainsOneReplicate_counter)=iStrain;
+        strainsOneReplicate_counter=strainsOneReplicate_counter+1;
+    end
+    
+end
+
+%Remove strains with one replicate
+setpoints_normalized(StrainsOneReplicate_idx,:)=[];
 
 %%
 plot_hist_BC187_vals(BC187_vals_vector,higher_bound,lower_bound)
