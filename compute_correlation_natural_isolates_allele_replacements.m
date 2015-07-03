@@ -83,7 +83,7 @@ Set_fig_RE(hfig,9,9,9)
 
 %%
 filename=('correlation_natural_isolates_allele_swaps')
-export_fig(filename,'-pdf',  '-transparent', '-nocrop')
+export_fig_specific_path(filename,'-pdf',  '-transparent', '-nocrop')
 %%
 [x, y]=remove_nan_rows(x1(:,1)',x1(:,2)');
 

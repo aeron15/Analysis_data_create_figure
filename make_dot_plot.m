@@ -15,8 +15,8 @@ for iStrain = 1:length(strains)
     data_output(iStrain).strain=lab{iStrain};
     data_output(iStrain).values=(diff_sp(idx));
     
-    sp_mean(iStrain) = mean(diff_sp(idx));
-    sp_std(iStrain) = std(diff_sp(idx));
+    sp_mean(iStrain) = nanmean(diff_sp(idx));
+    sp_std(iStrain) = nanstd(diff_sp(idx));
     std_error(iStrain) = sp_std(iStrain)/sqrt(length(idx)-1);
     
 end
@@ -44,7 +44,7 @@ for iStrain = 1:length(strains_new)
     end
     plot(iStrain,sp_mean,'ok','MarkerSize',10,'MarkerFaceColor',[0.5 0.5 0.5]);
     hold all;
-    plot(iStrain,mean(sp_mean),'ok','MarkerSize',10,'MarkerFaceColor',rgb('DarkOrange'));
+    plot(iStrain,nanmean(sp_mean),'ok','MarkerSize',10,'MarkerFaceColor',rgb('DarkOrange'));
     
 end
 

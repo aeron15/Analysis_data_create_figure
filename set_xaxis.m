@@ -1,5 +1,5 @@
 function set_xaxis()
 
-ylim([-9 -2])
+xlim([-9,-1])
 
 end

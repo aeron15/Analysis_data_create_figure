@@ -32,6 +32,8 @@ setpoints_normalized=extract_data(strains, setpoints_normalized);
 %%
 
 BC187_vals_vector=cell2mat(setpoints_normalized(:,1));
+BC187_vals_vector(isnan(BC187_vals_vector))=[];
+
 BC187_mean=nanmean(BC187_vals_vector);
 BC187_median=median(BC187_vals_vector);
 

@@ -27,8 +27,8 @@ function compute_setpoints_reference_BC187()
 
 %% Load data
 
-path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_analysis_data/20150623_data/GLU_RYB23/'
-load([path_data 'setpoints_normalized.mat']);
+path_data='/Users/RenanEscalante/Dropbox/Phenotypic_diversity/var_analysis_data/20150623_data/GLU_area/'
+load([path_data 'setpoints_normalized_area.mat']);
 
 %% Filter data using 2 standard deviations from the median reference BC187 value
 setpoints_normalized=filterData_onlyforNaturalIsolates(setpoints_normalized);
@@ -112,12 +112,12 @@ QueryStrains_counter=determine_strains_in_Cromie();
 
 % Compute difference between BC187 and YJM978
 strain1='BC187'; strain2='YJM978';
-[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
+[~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 %Range of the set points on figure 1 (Natural Isolates)
 strain1='YJM421'; 
 strain2='DBVPG1373';
-[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
+[~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 % Average standard deviation of natural isolates set point of induction
 NaturalIsolates_AverageStandardDeviation=compute_average_standard_deviation(data_output);
@@ -128,12 +128,12 @@ NaturalIsolates_CoefficientOfVariation=compute_average_coefficient_of_variation(
 %Range of the natural isolates strains on figure 4
 strain1='YJM421'; 
 strain2='DBVPG1373';
-[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
+[~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 %Range of the strains on figure 5
 strain1='YJM978'; 
 strain2='I-14';
-[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
+[~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 
 %% Figure 3. Allele swaps BC187-YJM978
@@ -160,12 +160,12 @@ BC187bg_PercentConversion=BC187background_differences./InterStrain_distance;
 %Range of the strains on figure 3
 strain1='GAL3-BC (YJM978)'; 
 strain2='GAL3-YJM (YJM978)';
-[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
+[~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 %Range of the strains on figure 3
 strain1='GAL3-BC (BC187) '; 
 strain2='GAL3-YJM (BC187) ';
-[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
+[~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 %% Figure 3 test heterologos locus effect
 strains = {'RY16*', 'RYB53*', 'RYB59*', 'RYB65*', 'RYB66*', 'RYB28*'};
@@ -200,7 +200,7 @@ Number_of_Groups_Allele_replacements=T_test_walking(data_output, loc);
 %Range of variation of the allele replacements
 strain1= data_output(loc(1)).strain; 
 strain2= data_output(loc(end)).strain;
-[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
+[~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
 
 save('data_output_figure_4','data_output');
 
@@ -222,7 +222,7 @@ StrainsWithBC187Allele_names={data_output.strain}';
 % strain2= 'GAL3-BC187 (I-14)';
 strain1= data_output(loc(1)).strain; 
 strain2= data_output(loc(end)).strain;
-[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
+[~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
 
 
 %% Figure 5 YJM978 alleles 
@@ -234,7 +234,7 @@ StrainsWithYJM978Allele_names={data_output.strain}';
 
 strain1= data_output(loc(1)).strain; 
 strain2= data_output(loc(end)).strain;
-[FoldDifferenceLowerBound,FoldDifferenceHigherBound,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
+[~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
 
 
 %% Figure 5 all allele replacements of YJM978 and BC187
