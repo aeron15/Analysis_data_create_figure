@@ -47,7 +47,6 @@ filename='All_data';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
 %Compute coefficient of variation across all the paper
-
 AllData_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
 
 save('data_output_figure_glucose_titration','data_output');
@@ -80,9 +79,13 @@ filename='Fig_1_natural_isolates';
 save('data_output_figure_1','data_output','loc');
 save('data_output_natural_isolates_glucose_titration','data_output','loc');
 
+%Compute coefficient of variation across all the paper
+NaturalIsolates_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
+
+
 %>>>>>LOG ENTRIES
 add_entry_log('Number of natural isolates',length({data_output.strain}));
-add_entry_log('Coefficient of variation across replicates', AllData_CoefficientOfVariation );
+add_entry_log('Natural Isolates coefficient of variation across replicates', NaturalIsolates_CoefficientOfVariation);
 
 %Correlation genetic distance and set point of induction using RAD-seq data
 NaturalIsolates_correlation=compute_correlation_genetic_distance_set_point_induction(data_output,loc);
