@@ -55,4 +55,4 @@ set(gca,'box','off')
 Set_fig_RE(hfig,9,9,20);
 
 filename=[pathOut file_append 'Mean_error_bar_' ];
-export_fig(filename,'-pdf',  '-transparent', '-nocrop')
+export_fig_specific_path(filename,'-pdf',  '-transparent', '-nocrop')

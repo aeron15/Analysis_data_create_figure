@@ -54,5 +54,5 @@ Set_fig_RE(k,9,9,9);
 ylim([-9 -3]);
 
 filename = ['fig4_sorted_swaps.pdf'];
-export_fig(filename, '-pdf','-transparent','-nocrop');
+export_fig_specific_path(filename, '-pdf','-transparent','-nocrop');
 

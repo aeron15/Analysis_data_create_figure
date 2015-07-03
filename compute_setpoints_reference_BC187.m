@@ -96,14 +96,14 @@ strains = setdiff(all_strains, rm_strains);
 filename='Fig_1_natural_isolates';
 
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
-save('data_output_figure_1','data_output');
+save('data_output_figure_1','data_output','loc');
 save('data_output_natural_isolates_glucose_titration','data_output','loc');
 
 %Determine the number of groups
 Number_of_Groups_Natural_Isolates=T_test_walking(data_output, loc);
 
 %Correlation genetic distance and set point of induction using RAD-seq data
-NaturalIsolates_correlation=compute_correlation_genetic_distance_set_point_induction(data_output,loc);
+%NaturalIsolates_correlation=compute_correlation_genetic_distance_set_point_induction(data_output,loc);
 
 %Highlight specific points of the data
 %plot_correlation_highlight_points()

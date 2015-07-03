@@ -51,7 +51,7 @@ Set_fig_RE(hfig,14,14,14)
 
 %%
 filename='NaturalIsolates_correlation_genetic distance_setpoint';
-export_fig(filename, '-pdf','-transparent','-nocrop');
+export_fig_specific_path(filename, '-pdf','-transparent','-nocrop');
 
 %%
 

@@ -23,15 +23,15 @@ plot_figure_mean_error_bar(data_output,'file_append','figure4')
 [NaturalIsolatesSwaps_CorrelationCoefficient,NaturalIsolatesSwaps_PValueCorrelation]=compute_correlation_natural_isolates_allele_replacements;
 
 
-%% Print GAL3 hemizygous hybrid
-
-load data_output_figure_GAL3HH.mat
-plot_figure_mean_error_bar(data_output,'file_append','figureGAL3HH','figure_size','HH')
-
-%% Print SOK1 hemizygous hybrid
-
-load data_output_figure_SOK1HH.mat
-plot_figure_mean_error_bar(data_output,'file_append','figureSOK1HH','figure_size','HH')
+% %% Print GAL3 hemizygous hybrid
+% 
+% load data_output_figure_GAL3HH.mat
+% plot_figure_mean_error_bar(data_output,'file_append','figureGAL3HH','figure_size','HH')
+% 
+% %% Print SOK1 hemizygous hybrid
+% 
+% load data_output_figure_SOK1HH.mat
+% plot_figure_mean_error_bar(data_output,'file_append','figureSOK1HH','figure_size','HH')
 
 
 %% Print figure 4
