@@ -9,6 +9,7 @@ for iData_Output=1:length(data_output)
     
     QueryStrain_vals=data_output(iData_Output).values;
     %Computed weighted coefficient of variation
+    
     CoefficientVariation_vector(counter)=nanstd(QueryStrain_vals)./abs(nanmean(QueryStrain_vals));
     Weights(counter)=length(QueryStrain_vals);
     
@@ -28,9 +29,6 @@ strainsOneReplicate_idx=(CoefficientVariation_vector==0 | isnan(CoefficientVaria
 
 CoefficientVariation_vector(strainsOneReplicate_idx)=[];
 Weights(strainsOneReplicate_idx)=[];
-
-
-%AverageCoefficientVariation=nanmean(CoefficientVariation_vector);
 
 %Weighted coefficient of variation
 AverageCoefficientVariation=wmean(CoefficientVariation_vector,Weights);
