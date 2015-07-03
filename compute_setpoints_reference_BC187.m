@@ -25,9 +25,9 @@ save('all_strains_names','all_strains_names');
 all_strains  = {'Y55*'; 'NCYC110*'; 'L_1528*'; 'DBVPG6044*';
     'Y12_SGRP*'; 'W303*'; 'i378604X*'; 'DBVPG1373*';
     'YIIc17_E5*'; 'UWOPS87_2421*'; 'YPS163*'; 'CLIB215*';
-    'CLIB324*'; 'NC_02*'; 'PW5*'; 'YS4*'; 
+    'CLIB324*'; 'NC_02*'; 'PW5*'; 'YS4*';
     'T7*'; 'Y9_WashU*'; 'UWOPS03_4614*'; 'IL_01*';
-    'M22*'; 'DBVPG6765*'; 'YPS128*'; 'DBVPG1788*'; 
+    'M22*'; 'DBVPG6765*'; 'YPS128*'; 'DBVPG1788*';
     'DBVPG1853*'; 'L_1374*'; 'DBVPG1106*'; 'YJM421*';
     'Bb32*'; 'YJM428*'; 'UWOPS05_2272*'; 'DBVPG6040*';
     'YJM653*'; 'UC5*'; 'YPS1009*'; 'CLIB382*';
@@ -36,7 +36,7 @@ all_strains  = {'Y55*'; 'NCYC110*'; 'L_1528*'; 'DBVPG6044*';
     'BC187*'; 'YJM978*'; 'S288C*';'RY16*'; 'RYB53*'; 'RYB59*'; 'RYB65*'; 'RYB66*'; 'RYB28*';
     'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*';
     'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'; 'RYD52*'; 'RYD55*'; 'RYD06*';
-    'RYC45*';'RYC58*';'RYC49*'; 'RYC50*';'RYC51*'; 'RYC59_1*';'RYC52*';'RYC60*';'RYC62*'; 'RYB92*'; 'RYC72*'; 
+    'RYC45*';'RYC58*';'RYC49*'; 'RYC50*';'RYC51*'; 'RYC59_1*';'RYC52*';'RYC60*';'RYC62*'; 'RYB92*'; 'RYC72*';
     'RYD25*'; 'RYD27*'; 'RYD28*'; 'RYD30*'; 'RYD31*'; 'RYB59*'; 'RYB53*'};
 
 rm_strains = {'YIIc17_E5*'; 'i273614N*'; 'i378604X*'; 'YS4*'; 'NCYC110*'; 'Y55*'; 'PW5*'; 'DBVPG6044*'; 'W303*'; 'UWOPS05_2272*'};
@@ -53,13 +53,15 @@ AllData_CoefficientOfVariation=compute_average_coefficient_of_variation(data_out
 save('data_output_figure_glucose_titration','data_output');
 
 
+
+
 %% Figure 1. Setpoints of natural isolates
 
 %Removed CLIB215
 all_strains  = {'Y55*'; 'NCYC110*'; 'L_1528*'; 'DBVPG6044*';
     'Y12_SGRP*'; 'W303*'; 'i378604X*'; 'DBVPG1373*';
     'YIIc17_E5*'; 'UWOPS87_2421*'; 'YPS163*';
-    'CLIB324*'; 'NC_02*'; 'PW5*'; 'YS4*'; 
+    'CLIB324*'; 'NC_02*'; 'PW5*'; 'YS4*';
     'T7*'; 'Y9_WashU*'; 'UWOPS03_4614*'; 'IL_01*';
     'M22*'; 'DBVPG6765*'; 'YPS128*';
     'DBVPG1853*'; 'L_1374*'; 'DBVPG1106*'; 'YJM421*';
@@ -78,13 +80,16 @@ filename='Fig_1_natural_isolates';
 save('data_output_figure_1','data_output','loc');
 save('data_output_natural_isolates_glucose_titration','data_output','loc');
 
-%Determine the number of groups
-Number_of_Groups_Natural_Isolates=T_test_walking(data_output, loc);
+%>>>>>LOG ENTRIES
+add_entry_log('Number of natural isolates',length({data_output.strain}));
+add_entry_log('Coefficient of variation across replicates', AllData_CoefficientOfVariation );
 
 %Correlation genetic distance and set point of induction using RAD-seq data
-%NaturalIsolates_correlation=compute_correlation_genetic_distance_set_point_induction(data_output,loc);
+NaturalIsolates_correlation=compute_correlation_genetic_distance_set_point_induction(data_output,loc);
+add_entry_log('Correlation between genetic distance and set point difference', NaturalIsolates_correlation);
 
-%Highlight specific points of the data
+%Highlight specific points of the data in the correlation plot as a
+%reference
 %plot_correlation_highlight_points()
 
 QueryStrains_counter=determine_strains_in_Cromie();
@@ -94,8 +99,8 @@ strain1='BC187'; strain2='YJM978';
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 %Range of the set points on figure 1 (Natural Isolates)
-strain1='YJM421'; 
-strain2='DBVPG1373';
+strain1='YJM421';
+strain2='YPS1009';
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 % Average standard deviation of natural isolates set point of induction
@@ -105,14 +110,18 @@ NaturalIsolates_AverageStandardDeviation=compute_average_standard_deviation(data
 NaturalIsolates_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
 
 %Range of the natural isolates strains on figure 4
-strain1='YJM421'; 
+strain1='YJM421';
 strain2='DBVPG1373';
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 %Range of the strains on figure 5
-strain1='YJM978'; 
+strain1='YJM978';
 strain2='I-14';
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
+
+
+
+
 
 
 %% Figure 3. Allele swaps BC187-YJM978
@@ -137,12 +146,12 @@ YJM978bg_PercentConversion=YJM978background_differences./InterStrain_distance;
 BC187bg_PercentConversion=BC187background_differences./InterStrain_distance;
 
 %Range of the strains on figure 3
-strain1='GAL3-BC (YJM978)'; 
+strain1='GAL3-BC (YJM978)';
 strain2='GAL3-YJM (YJM978)';
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 %Range of the strains on figure 3
-strain1='GAL3-BC (BC187) '; 
+strain1='GAL3-BC (BC187) ';
 strain2='GAL3-YJM (BC187) ';
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
@@ -160,14 +169,14 @@ Delta_GAL3=BC_het_effect-YJ_het_effect;
 set_1=[fig3(1).values;fig3(6).values-Delta_GAL3];%haploids
 set_2=[fig3(3).values;fig3(4).values-Delta_GAL3];
 
-%T-TEST 
+%T-TEST
 [h,p,ci,stats]=ttest2(set_1,set_2);
 
 %MANN-WHITNEY
 [p,h,stats] = ranksum(set_1,set_2);
 
 
-%% Figure 4. Natural Isolate ORF swaps into YJM978 
+%% Figure 4. Natural Isolate ORF swaps into YJM978
 
 %strains = {'RYC45*','RYC58*','RYC49*', 'RYC50*','RYC51*', 'RYC59_1*','RYC52*','RYC60*','RYC62*', 'RYB92*', 'RYC72*','RYD27*', 'RYD28*', 'RYD30*', 'RYD31*', 'RYB59*', 'RYB53*'};
 strains = {'RYC45*','RYC58*','RYC49*', 'RYC50*','RYC51*', 'RYC59_1*','RYC52*','RYC60*','RYC62*', 'RYB92*', 'RYC72*', 'RYD25*', 'RYD27*', 'RYD28*', 'RYD30*', 'RYD31*', 'RYB59*', 'RYB53*'};
@@ -177,7 +186,7 @@ filename='Fig_4_YJ_bg_Diff_alleles';
 Number_of_Groups_Allele_replacements=T_test_walking(data_output, loc);
 
 %Range of variation of the allele replacements
-strain1= data_output(loc(1)).strain; 
+strain1= data_output(loc(1)).strain;
 strain2= data_output(loc(end)).strain;
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
 
@@ -197,21 +206,21 @@ filename='Fig5_BC';
 StrainsWithBC187Allele_names={data_output.strain}';
 
 %Range of variation of the allele replacements
-% strain1= 'GAL3-BC (YJM978)'; 
+% strain1= 'GAL3-BC (YJM978)';
 % strain2= 'GAL3-BC187 (I-14)';
-strain1= data_output(loc(1)).strain; 
+strain1= data_output(loc(1)).strain;
 strain2= data_output(loc(end)).strain;
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
 
 
-%% Figure 5 YJM978 alleles 
+%% Figure 5 YJM978 alleles
 %strains_YJM = {'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'; 'RYD52*'; 'RYD55*'; 'RYD06*'};
 strains_YJM = {'RYB89*'; 'RYD02*'; 'RYD04*'; 'RYD13*'; 'RYD15*'; 'RYB66*'; 'RYB59*'};
 filename='Fig5_YJ_alelle';
 [data_output,loc]=make_dot_plot(strains_YJM, all_strains_vals_vector, all_strains_names, filename);
 StrainsWithYJM978Allele_names={data_output.strain}';
 
-strain1= data_output(loc(1)).strain; 
+strain1= data_output(loc(1)).strain;
 strain2= data_output(loc(end)).strain;
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
 
@@ -231,8 +240,8 @@ save('data_output_figure_5','data_output');
 %% SI figures. Hemizygous hybrid strains
 close all;
 strains={'RYB22';
-'RYB23';
-'RYB24'}
+    'RYB23';
+    'RYB24'}
 %'RYB42'}
 filename='GAL3_HH';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
@@ -247,9 +256,9 @@ save('data_output_figure_GAL3HH','data_output');
 
 %%
 strains={'RYC69';
-'RYD40';
-'RYB22'
-};
+    'RYD40';
+    'RYB22'
+    };
 filename='SOK1_HH';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 save('data_output_figure_SOK1HH','data_output');
@@ -258,6 +267,9 @@ save('data_output_figure_SOK1HH','data_output');
 [SOK1YJ_h2,SOK1YJ_p2]=ttest2(data_output(2).values,data_output(3).values);
 
 %% CREATE LOG with all the numbers
+%>>> EXPORT TO LOG
+load('../outputFigures/log_results.mat');
+cell2csv('../outputFigures/log_results.csv',log_results);
 
 
 
@@ -267,6 +279,5 @@ save('data_output_figure_SOK1HH','data_output');
 
 
 
-    
 
 

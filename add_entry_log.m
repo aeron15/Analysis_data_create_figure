@@ -9,11 +9,13 @@ if exist('../outputFigures/log_results.mat')
 else
     
     log_results={};
-    record_number=1;
+    record_number=0;
 end
 
 log_results{record_number+1,1}=message;%string
 log_results{record_number+1,2}=value;%double
 
+
+save('../outputFigures/log_results.mat','log_results')
 
 end

@@ -38,4 +38,9 @@ FoldDifferenceMean=2.^abs(Strain1_mean-Strain2_mean);
 ErrorFoldDifference=sqrt((Strain1_std).^2+(Strain2_std).^2);
 %^BC187_YJM978_error_difference_Strains=sqrt((BC187_std_fig1).^2+(YJM978_std_fig1).^2);
 
+%>>>>>EXPORT TO LOG
+add_entry_log(['Mean fold difference between ' Strain1 'and ' Strain2], FoldDifferenceMean);
+add_entry_log(['Error fold difference between ' Strain1 'and ' Strain2], ErrorFoldDifference);
+
+
 end
