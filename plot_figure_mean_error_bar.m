@@ -54,5 +54,5 @@ xticklabel_rotate(1:length(data_output),45,namesStrains(idx));
 set(gca,'box','off')
 Set_fig_RE(hfig,9,9,20);
 
-filename=[pathOut 'Mean_error_bar_' file_append];
+filename=[pathOut file_append 'Mean_error_bar_' ];
 export_fig(filename,'-pdf',  '-transparent', '-nocrop')

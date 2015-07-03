@@ -62,5 +62,5 @@ ylim([-9 -3])
 
 Set_fig_RE(hfig,9,9,20)
 
-filename=[pathOut 'Mean_error_bar_side_histogram' file_append];
+filename=[pathOut file_append 'Mean_error_bar_side_histogram' ];
 export_fig(filename,'-pdf',  '-transparent', '-nocrop')

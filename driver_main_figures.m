@@ -6,6 +6,10 @@ function driver_main_figures
 load data_output_figure_1.mat
 plot_figure_mean_error_bar_side_histogram(data_output,'file_append','figure1')
 
+%Correlation genetic distance and set point of induction using RAD-seq data
+NaturalIsolates_correlation=compute_correlation_genetic_distance_set_point_induction(data_output,loc);
+
+
 %%
 load data_output_figure_3.mat
 plot_figure_mean_error_bar(data_output,'file_append','figure3','figure_size','AlleleReplacement')
@@ -13,6 +17,11 @@ plot_figure_mean_error_bar(data_output,'file_append','figure3','figure_size','Al
 %%
 load data_output_figure_4.mat
 plot_figure_mean_error_bar(data_output,'file_append','figure4')
+
+%Compute correlation coefficient between natural isolates and allele
+%replacements
+[NaturalIsolatesSwaps_CorrelationCoefficient,NaturalIsolatesSwaps_PValueCorrelation]=compute_correlation_natural_isolates_allele_replacements;
+
 
 %% Print GAL3 hemizygous hybrid
 

@@ -50,7 +50,7 @@ ylabel('Genetic distance')
 Set_fig_RE(hfig,14,14,14)
 
 %%
-filename='NaturalIsolates_correlation_setpoint_genetic distance';
+filename='NaturalIsolates_correlation_genetic distance_setpoint';
 export_fig(filename, '-pdf','-transparent','-nocrop');
 
 %%

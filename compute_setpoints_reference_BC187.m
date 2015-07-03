@@ -82,7 +82,7 @@ all_strains  = {'Y55*'; 'NCYC110*'; 'L_1528*'; 'DBVPG6044*';
     'YIIc17_E5*'; 'UWOPS87_2421*'; 'YPS163*';
     'CLIB324*'; 'NC_02*'; 'PW5*'; 'YS4*'; 
     'T7*'; 'Y9_WashU*'; 'UWOPS03_4614*'; 'IL_01*';
-    'M22*'; 'DBVPG6765*'; 'YPS128*'; 'DBVPG1788*'; 
+    'M22*'; 'DBVPG6765*'; 'YPS128*';
     'DBVPG1853*'; 'L_1374*'; 'DBVPG1106*'; 'YJM421*';
     'Bb32*'; 'YJM428*'; 'UWOPS05_2272*'; 'DBVPG6040*';
     'YJM653*'; 'UC5*'; 'YPS1009*'; 'CLIB382*';
@@ -97,7 +97,7 @@ filename='Fig_1_natural_isolates';
 
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 save('data_output_figure_1','data_output');
-save('data_output_natural_isolates_glucose_titration','data_output');
+save('data_output_natural_isolates_glucose_titration','data_output','loc');
 
 %Determine the number of groups
 Number_of_Groups_Natural_Isolates=T_test_walking(data_output, loc);
@@ -206,8 +206,6 @@ save('data_output_figure_4','data_output');
 
 %Compute correlation coefficient between natural isolates and allele
 %replacements
-
-%Need to fix data
 [NaturalIsolatesSwaps_CorrelationCoefficient,NaturalIsolatesSwaps_PValueCorrelation]=compute_correlation_natural_isolates_allele_replacements;
 
 
@@ -246,6 +244,7 @@ strains = {'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*';
 
 filename='Fig5_BC_YJ';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
+save('data_output_figure_5','data_output');
 
 %Determine fold differences between pairs of strains
 [AlleleReplacementBackgrounds_mean,AlleleReplacementBackgrounds_std,AlleleReplacementBackgrounds_sem]=compute_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)

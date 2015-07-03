@@ -65,7 +65,7 @@ xticklabel_rotate([1:length(lab)],45,lab,'interpreter','tex');
 
 Set_fig_RE(k,9,9,9);
 box off;
-filename = ['fig6_both_alleles.pdf'];
+filename = ['fig5_both_alleles.pdf'];
 export_fig(filename, '-pdf','-transparent','-nocrop');
 
 %% plot setpoint gradients with error bars
@@ -96,6 +96,6 @@ xticklabel_rotate([1:length(lab)],45,lab,'interpreter','tex');
 Set_fig_RE(k,9,9,9);
 box off;
 
-filename = ['fig6_both_alleles_stacked.pdf'];
+filename = ['fig5_both_alleles_stacked.pdf'];
 export_fig(filename, '-pdf','-transparent','-nocrop');
 

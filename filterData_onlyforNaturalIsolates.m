@@ -53,6 +53,6 @@ idx_to_remove=(BC187_vals_vector<higher_bound | BC187_vals_vector>lower_bound);
 setpoints_normalized(idx_to_remove,:)=[];
 
 %%
-%hist(BC187_vals_vector)
+plot_hist_BC187_vals(BC187_vals_vector,higher_bound,lower_bound)
 
 end
