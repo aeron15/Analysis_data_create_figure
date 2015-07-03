@@ -278,6 +278,8 @@ save('data_output_figure_SOK1HH','data_output');
 [SOK1BC_h1,SOK1BC_p1]=ttest2(data_output(1).values,data_output(3).values);
 [SOK1YJ_h2,SOK1YJ_p2]=ttest2(data_output(2).values,data_output(3).values);
 
+%% CREATE LOG with all the numbers
+
 
 
 
