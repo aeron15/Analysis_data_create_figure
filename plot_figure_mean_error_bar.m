@@ -48,11 +48,11 @@ end
 
 hold all;
 
-ylim([-9 -3])
+set_yaxis() 
 xticklabel_rotate(1:length(data_output),45,namesStrains(idx));
 
 set(gca,'box','off')
 Set_fig_RE(hfig,9,9,20);
 
-filename=[pathOut 'Mean_error_bar_' file_append];
-export_fig(filename,'-pdf',  '-transparent', '-nocrop')
+filename=[pathOut file_append 'Mean_error_bar_' ];
+export_fig_specific_path(filename,'-pdf',  '-transparent', '-nocrop')
