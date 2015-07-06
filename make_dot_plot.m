@@ -49,7 +49,7 @@ for iStrain = 1:length(strains_new)
 end
 
 format_fig(k, strains, loc);
-export_fig(filename, '-pdf','-transparent','-nocrop');
+export_fig_specific_path(filename, '-pdf','-transparent','-nocrop');
 
 %% Save data into a file
 %save(['output_' filename],'data_output','loc')

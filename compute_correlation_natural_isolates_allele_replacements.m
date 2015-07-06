@@ -2,9 +2,9 @@ function [Correlation_Coefficient,P_Value]=compute_correlation_natural_isolates_
 
 %COMPUTE_CORRELATION_NATURAL_ISOLATES_ALLELE_REPLACEMENTS
 
-load('data_output_figure_1.mat');
+load('../outputFigures/data_output_figure_1.mat');
 data_output1=data_output;
-load('data_output_figure_4.mat');
+load('../outputFigures/data_output_figure_4.mat');
 data_output4=data_output;
 
 clear data_output;

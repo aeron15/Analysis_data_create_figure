@@ -17,7 +17,7 @@ xlabel('Set point of induction of BC187')
 
 
 filename='BC187_vals_histogram';
-export_fig(filename, '-pdf','-transparent','-nocrop');
+export_fig_specific_path(filename, '-pdf','-transparent','-nocrop');
 
 %%
 
@@ -32,6 +32,6 @@ Set_fig_RE(hfig,9,9,20)
 xlabel('Set point of induction of BC187')
 
 filename='BC187_box_plot';
-export_fig(filename, '-pdf','-transparent','-nocrop');
+export_fig_specific_path(filename, '-pdf','-transparent','-nocrop');
 
 
