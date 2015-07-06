@@ -1,0 +1,10 @@
+data_output_figure_1.mat
+data_output_figure_3.mat
+data_output_figure_4.mat
+data_output_figure_5.mat
+data_output_figure_GAL3HH.mat
+data_output_figure_SOK1HH.mat
+data_output_figure_galactose_titration.mat
+data_output_figure_glucose_titration.mat
+data_output_natural_isolates_galactose_titration.mat
+data_output_natural_isolates_glucose_titration.mat

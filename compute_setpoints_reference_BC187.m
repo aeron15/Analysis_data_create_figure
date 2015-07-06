@@ -17,8 +17,8 @@ setpoints_normalized=filterData_onlyforNaturalIsolates(setpoints_normalized);
 all_strains_vals_vector=cell2mat(setpoints_normalized(:,2));
 all_strains_names=setpoints_normalized(:,3);
 
-save('all_strains_vals_vector','all_strains_vals_vector');
-save('all_strains_names','all_strains_names');
+save('../outputFigures/all_strains_vals_vector','all_strains_vals_vector');
+save('../outputFigures/all_strains_names','all_strains_names');
 
 %% Setpoints of all strains in study
 
@@ -49,7 +49,7 @@ filename='All_data';
 %Compute coefficient of variation across all the paper
 AllData_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
 
-save('data_output_figure_glucose_titration','data_output');
+save('../outputFigures/data_output_figure_glucose_titration','data_output');
 
 
 
@@ -76,8 +76,8 @@ strains = setdiff(all_strains, rm_strains);
 filename='Fig_1_natural_isolates';
 
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
-save('data_output_figure_1','data_output','loc');
-save('data_output_natural_isolates_glucose_titration','data_output','loc');
+save('../outputFigures/data_output_figure_1','data_output','loc');
+save('../outputFigures/data_output_natural_isolates_glucose_titration','data_output','loc');
 
 %Compute coefficient of variation across all the paper
 NaturalIsolates_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
@@ -183,7 +183,7 @@ strains = {'RYC45*','RYC58*','RYC49*', 'RYC50*','RYC51*', 'RYC59_1*','RYC52*','R
 %Remove RYB92 which is the S288C allele
 filename='Fig_4_YJ_bg_Diff_alleles';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
-save('data_output_figure_4','data_output');
+save('../outputFigures/data_output_figure_4','data_output');
 
 %Range of variation of the allele replacements
 strain1= data_output(loc(1)).strain;
@@ -238,7 +238,7 @@ strains = {'RYD42*'; 'RYD01*'; 'RYD03*'; 'RYD12*'; 'RYD14*'; 'RYB65*'; 'RYB53*';
 
 filename='Fig5_BC_YJ';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
-save('data_output_figure_5','data_output');
+save('../outputFigures/data_output_figure_5','data_output');
 
 %Determine fold differences between pairs of strains
 [AlleleReplacementBackgrounds_mean,AlleleReplacementBackgrounds_std,AlleleReplacementBackgrounds_sem]=compute_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)
@@ -251,7 +251,7 @@ strains={'RYB22';
 %'RYB42'}
 filename='GAL3_HH';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
-save('data_output_figure_GAL3HH','data_output');
+save('../outputFigures/data_output_figure_GAL3HH','data_output');
 
 [GAL3YJHH_h,GAL3YJHH_p]=ttest2(data_output(2).values,data_output(1).values);
 [GAL3BCHH_h,GAL3BCHH_h_p]=ttest2(data_output(3).values,data_output(1).values);
@@ -267,7 +267,7 @@ strains={'RYC69';
     };
 filename='SOK1_HH';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
-save('data_output_figure_SOK1HH','data_output');
+save('../outputFigures/data_output_figure_SOK1HH','data_output');
 
 [SOK1BC_h1,SOK1BC_p1]=ttest2(data_output(1).values,data_output(3).values);
 [SOK1YJ_h2,SOK1YJ_p2]=ttest2(data_output(2).values,data_output(3).values);
