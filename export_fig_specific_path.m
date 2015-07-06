@@ -417,7 +417,7 @@ if isvector(options)
     if options.pdf
         pdf_nam = [options.name '.pdf'];
         
-        pdf_nam=[pathOutput pdf_nam]
+        pdf_nam=[pathOutput pdf_nam];
         
         
     else

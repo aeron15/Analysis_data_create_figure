@@ -129,7 +129,7 @@ strains = {'RYB53*', 'RYB59*', 'RYB65*', 'RYB66*'};
 
 filename='Fig_3_allele_swaps';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
-save('data_output_figure_3','data_output');
+save('../outputFigures/data_output_figure_3','data_output');
 
 %compute_conversion_rate
 

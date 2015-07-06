@@ -10,8 +10,8 @@ end
 %Analysis of data
 compute_setpoints_reference_BC187()
 
-%Comparison of data in figure 1
-compute_ANOVA_to_compare_groups
+%Comparison of data in figure 1 and 4
+%compute_ANOVA_to_compare_groups
 
 driver_main_figures()
 

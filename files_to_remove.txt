@@ -1,8 +1,2 @@
-Mean_error_bar_figure3.pdf
-Mean_error_bar_figure4.pdf
-Mean_error_bar_figureGAL3HH.pdf
-Mean_error_bar_figureSOK1HH.pdf
-fig5_sorted_swaps.pdf
-fig6_both_alleles.pdf
-fig6_both_alleles_stacked.pdf
-figure1Mean_error_bar_side_histogram.pdf
+BC187_box_plot.pdf
+BC187_vals_histogram.pdf

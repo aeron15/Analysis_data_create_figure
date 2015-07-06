@@ -3,18 +3,18 @@ function driver_main_figures
 %DRIVER_MAIN_FIGURES plots the main figures of the paper in a nice
 %format for publication
 
-load data_output_figure_1.mat
+load ../outputFigures/data_output_figure_1.mat
 plot_figure_mean_error_bar_side_histogram(data_output,'file_append','figure1')
 
 %Correlation genetic distance and set point of induction using RAD-seq data
 NaturalIsolates_correlation=compute_correlation_genetic_distance_set_point_induction(data_output,loc);
 
 %%
-load data_output_figure_3.mat
+load ../outputFigures/data_output_figure_3.mat
 plot_figure_mean_error_bar(data_output,'file_append','figure3','figure_size','AlleleReplacement')
 
 %%
-load data_output_figure_4.mat
+load ../outputFigures/data_output_figure_4.mat
 plot_figure_mean_error_bar(data_output,'file_append','figure4')
 
 %Compute correlation coefficient between natural isolates and allele
@@ -23,12 +23,12 @@ plot_figure_mean_error_bar(data_output,'file_append','figure4')
 
 %% Make GAL3 hemizygous hybrid
 
-load data_output_figure_GAL3HH.mat
+load ../outputFigures/data_output_figure_GAL3HH.mat
 plot_figure_mean_error_bar(data_output,'file_append','figureGAL3HH','figure_size','HH')
 
 %% Make SOK1 hemizygous hybrid
 
-load data_output_figure_SOK1HH.mat
+load ../outputFigures/data_output_figure_SOK1HH.mat
 plot_figure_mean_error_bar(data_output,'file_append','figureSOK1HH','figure_size','HH')
 
 
