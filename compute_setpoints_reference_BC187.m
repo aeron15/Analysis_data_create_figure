@@ -131,20 +131,8 @@ filename='Fig_3_allele_swaps';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 save('../outputFigures/data_output_figure_3','data_output');
 
-%compute_conversion_rate
-
-InterStrain_distance=abs(mean(data_output(2).values)-mean(data_output(3).values));
-
-%data_output(1).values=data_output(1).values([1:3 5]);
-
-YJM978background_differences=abs(mean(data_output(2).values)-mean(data_output(1).values))
-BC187background_differences=abs(mean(data_output(3).values)-mean(data_output(4).values));
-
-%Compute percent conversion strains
-YJM978bg_PercentConversion=YJM978background_differences./InterStrain_distance;
-BC187bg_PercentConversion=BC187background_differences./InterStrain_distance;
-add_entry_log('Conversion in the YJM978 background', NaturalIsolates_correlation);
-add_entry_log('Conversion in the YJM978 background', NaturalIsolates_correlation);
+%Compute precent conversion
+[YJM978bg_PercentConversion,BC187bg_PercentConversion,Error_conversion_YJ,Error_conversion_BC]=compute_conversion_rate_between_BC187_YJM978()
 
 %Range of the strains on figure 3
 strain1='GAL3-BC (YJM978)';
@@ -155,6 +143,7 @@ strain2='GAL3-YJM (YJM978)';
 strain1='GAL3-BC (BC187) ';
 strain2='GAL3-YJM (BC187) ';
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
+
 
 %% Figure 3 test heterologos locus effect
 strains = {'RY16*', 'RYB53*', 'RYB59*', 'RYB65*', 'RYB66*', 'RYB28*'};
@@ -193,8 +182,6 @@ strain2= data_output(loc(end)).strain;
 %>>>>LOG ENTRY
 add_entry_log('Range variation Allele Swaps Figure 4 background YJM978', FoldDifferenceMean);
 add_entry_log('Error range of variation fold Difference', ErrorFoldDifference);
-
-
 
 %Compute correlation coefficient between natural isolates and allele
 %replacements

@@ -10,8 +10,8 @@ Strain2_idx=determine_index(StrainsData_names,Strain2);
 Strain1_vals=data_output(Strain1_idx).values;
 Strain2_vals=data_output(Strain2_idx).values;
 
-Strain1_mean=mean(data_output(Strain1_idx).values);
-Strain2_mean=mean(data_output(Strain2_idx).values);
+Strain1_mean=nanmean(data_output(Strain1_idx).values);
+Strain2_mean=nanmean(data_output(Strain2_idx).values);
 
 Strain1_SEM=compute_standard_error(Strain1_vals);
 Strain2_SEM=compute_standard_error(Strain2_vals);
