@@ -34,15 +34,15 @@ plot_figure_mean_error_bar(data_output,'file_append','figureSOK1HH','figure_size
 
 %% Make figure 4
 close all;
-load('all_strains_names')
-load('all_strains_vals_vector')
+load('../outputFigures/all_strains_names')
+load('../outputFigures/all_strains_vals_vector')
 
 fig4(all_strains_vals_vector, all_strains_names);
 
 %% Make figure 5  
 
 close all;
-load('all_strains_names')
-load('all_strains_vals_vector')
+load('../outputFigures/all_strains_names')
+load('../outputFigures/all_strains_vals_vector')
 fig5(all_strains_vals_vector, all_strains_names);
 
