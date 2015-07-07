@@ -17,11 +17,16 @@ for iStrain=1:length(StrainsWithBC187Allele_names)
 
 end
 
-%Compute men fold differnce and standard deviation
+%Compute mean fold differnce and standard deviation
 
 AlleleReplacementBackgrounds_mean=nanmean(FoldDifference_vector);
 AlleleReplacementBackgrounds_std=nanstd(FoldDifference_vector);
 AlleleReplacementBackgrounds_sem=AlleleReplacementBackgrounds_std./sqrt(length(FoldDifference_vector));
+
+add_entry_log('Mean fold difference between all strains (Figure 5)', AlleleReplacementBackgrounds_mean);
+add_entry_log('Standard deviation for all strains (Figure 5)', AlleleReplacementBackgrounds_std);
+add_entry_log('Standard error of mean for all strains (Figure 5)', AlleleReplacementBackgrounds_sem);
+
 hfig=figure();
 boxplot(FoldDifference_vector)
 title('Distributions of fold differences between BC187 and YJM978 GAL3 alleles across strains')
