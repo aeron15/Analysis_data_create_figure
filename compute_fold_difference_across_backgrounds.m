@@ -19,8 +19,8 @@ end
 
 %Compute men fold differnce and standard deviation
 
-AlleleReplacementBackgrounds_mean=nanmean(FoldDifference_vector);
-AlleleReplacementBackgrounds_std=nanstd(FoldDifference_vector);
+AlleleReplacementBackgrounds_mean=mean(FoldDifference_vector);
+AlleleReplacementBackgrounds_std=std(FoldDifference_vector);
 AlleleReplacementBackgrounds_sem=AlleleReplacementBackgrounds_std./sqrt(length(FoldDifference_vector));
 hfig=figure();
 boxplot(FoldDifference_vector)

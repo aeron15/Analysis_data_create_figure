@@ -15,6 +15,7 @@ load('map_plate_96');
 channels={'bfp_yfp','mCh_yfp','other_yfp'};
 
 %% Pick the threshold of induction for percentage calculation
+
 threshold=2.5;
 n_min_events=10;
 counts=1;
@@ -24,12 +25,13 @@ counter=1;
 offStrain_data=plates_other.('Plate_Plate_1').('C03').FITC_H;
 offStrain_data=plates_other.('Plate_Plate_10').('B07').FITC_H;
 
-[offStrain_y1,offStrain_x1]=ksdensity(log10(offStrain_data));
 
+[offStrain_y1,offStrain_x1]=ksdensity(log10(offStrain_data));
 % figure;
 % plot(offStrain_x1,offStrain_y1);
 
 %%
+
 % Check that all the fields are the same for all the plates to be combined
 
 plates=fieldnames(plates_bfp);
@@ -51,8 +53,8 @@ for a=1:length(plates)
                             dat_bfp_yfp=log10(plates_bfp.(plates{a}).(Well{iRow,jCol}).FITC_H);
                             
                             if (length(dat_bfp_yfp)>n_min_events)
-
                                 %BFP
+                                
                                 plates_hists.(plates{a}).(Well{iRow,jCol}).(channels{ichannel}).mean=nanmean(dat_bfp_yfp);
                                 plates_hists.(plates{a}).(Well{iRow,jCol}).(channels{ichannel}).median=nanmedian(dat_bfp_yfp);
                                 plates_hists.(plates{a}).(Well{iRow,jCol}).(channels{ichannel}).perc_ind=sum(dat_bfp_yfp>threshold)./length(dat_bfp_yfp);
@@ -116,7 +118,6 @@ for a=1:length(plates)
                                 [y,x]=ksdensity(other_strain);
                                 [perc_area] = compute_area(y,x,offStrain_y1,offStrain_x1);
                                 meioticSegregants_area(counter,1)=perc_area;
-                                meioticSegregants_area(counter,2)=length(dat_other_yfp)+length(dat_mCh_yfp)+length(dat_bfp_yfp);
                                 
                                 counter=counter+1;
                                 
@@ -151,13 +152,13 @@ meioticSegregants_area(idx_to_remove_2,:)=[];
 
 meioticSegregants_mean=meioitic_segregants(:,1);
 
-%% 
+%%
 plot_distribution(meioticSegregants_mean)
 %%
 plot_distribution(meioticSegregants_area)
 
-%% The area metric 
-
+%% The area metric is much more biased
+figure;
 %plot(meioticSegregants_mean,meioticSegregants_area,'.')
 
 scatterhist(meioticSegregants_mean,meioticSegregants_area)
