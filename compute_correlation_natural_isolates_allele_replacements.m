@@ -2,9 +2,9 @@ function [Correlation_Coefficient,P_Value]=compute_correlation_natural_isolates_
 
 %COMPUTE_CORRELATION_NATURAL_ISOLATES_ALLELE_REPLACEMENTS
 
-load('data_output_figure_1.mat');
+load('../outputFigures/data_output_figure_1.mat');
 data_output1=data_output;
-load('data_output_figure_4.mat');
+load('../outputFigures/data_output_figure_4.mat');
 data_output4=data_output;
 
 clear data_output;
@@ -43,34 +43,47 @@ for iStrain=1:length(AlleleReplacement_names)
         x1(iStrain,1)=mean(data_output4(iStrain).values);
         x1(iStrain,2)=mean(data_output1(idx).values);
         
-        x1(iStrain,3)=compute_standard_error(data_output4(iStrain).values);
-        x1(iStrain,4)=compute_standard_error(data_output1(idx).values);
+        x1(iStrain,3)=compute_standard_error(data_output4(iStrain).values);%Alleles in YJM978
+        x1(iStrain,4)=compute_standard_error(data_output1(idx).values);%Natural Isolates
         
     end
 end
 %% PLOT correlation plot
 hfig=figure('Position',[440   576   280   222]);
 hold all;
-
+%Get values
 x=x1(:,1);
 y=x1(:,2);
-plot(x,y,'.','MarkerSize',14);
+%Get error
+xe=x1(:,3);
+ye=x1(:,4);
 
-xlim([-9 -3 ])
-ylim([-9 -3 ])
+%%
+%plot(x,y,'.','MarkerSize',14);
+% [fittedX, fittedY]=compute_fit(x',y');
+% hold on;
+% plot(fittedX, fittedY, 'r-', 'LineWidth', 2,'MarkerSize',15);
+%%
 
-[fittedX, fittedY]=compute_fit(x',y');
-hold on;
-plot(fittedX, fittedY, 'r-', 'LineWidth', 2,'MarkerSize',15);
+H=errorbarxy(x,y,xe,ye,{'ko', 'k', 'k'});
+set(H.hMain,'Color', [1,1,1]*0.5, 'MarkerFaceColor', [1,1,1]*0.5,...
+     'MarkerSize',2, 'LineWidth', 2)
+hold all;
+plot([-9 -3],[-9 -3],'k');
+
+
+set_xaxis() 
+set_yaxis() 
+axis square;
 
 xlabel('Allele replacement set point')
 ylabel('Natural isolate set point')
 Set_fig_RE(hfig,9,9,9)
-axis square;
+
 
 %%
 filename=('correlation_natural_isolates_allele_swaps')
-export_fig(filename,'-pdf',  '-transparent', '-nocrop')
+export_fig_specific_path(filename,'-pdf',  '-transparent', '-nocrop')
 %%
 [x, y]=remove_nan_rows(x1(:,1)',x1(:,2)');
 

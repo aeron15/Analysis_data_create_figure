@@ -1,6 +1,6 @@
 function fig4(diff_sp, names)
 
-%% Figure 5. Natural Isolate ORF swaps into YJM978 
+%% Figure 4. Natural Isolate ORF swaps into YJM978 
 
 %strains = {'RYC45*','RYC58*','RYC49*', 'RYC50*','RYC51*', 'RYC59_1*','RYC52*','RYC60*','RYC62*', 'RYB92*', 'RYC72*', 'RYD25*', 'RYD27*', 'RYD28*', 'RYD30*', 'RYD31*', 'RYB59*', 'RYB53*', 'RYD29*'};
 strains = {'RYC45*','RYC58*','RYC49*', 'RYC50*','RYC51*', 'RYC59_1*','RYC52*','RYC60*','RYC62*', 'RYB92*', 'RYC72*', 'RYD25*', 'RYD27*', 'RYD28*', 'RYD30*', 'RYD31*', 'RYB59*', 'RYB53*'};
@@ -51,8 +51,8 @@ xlim([0 length(lab)+1]);
 xticklabel_rotate([1:length(lab)],45,lab(loc),'interpreter','tex');
 
 Set_fig_RE(k,9,9,9);
-ylim([-9 -3]);
+set_yaxis() ;
 
-filename = ['fig5_sorted_swaps.pdf'];
-export_fig(filename, '-pdf','-transparent','-nocrop');
+filename = ['fig4_sorted_swaps.pdf'];
+export_fig_specific_path(filename, '-pdf','-transparent','-nocrop');
 

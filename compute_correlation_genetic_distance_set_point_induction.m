@@ -14,7 +14,7 @@ counter=1;
 for iStrain=1:length(strains)
     
     for jStrain=iStrain+1:length(strains)%Makes fewer computations
-    %for jStrain=iStrain:length(strains)    
+
         Strain1_mean_setpoint=nanmean(data_output(iStrain).values);
         Strain2_mean_setpoint=nanmean(data_output(jStrain).values);
         
@@ -31,7 +31,7 @@ for iStrain=1:length(strains)
     end
     
 end
-
+display('done')
 %Plot correlation
 %Average the distance for the cases where there is more than one distance
 %computed
@@ -50,8 +50,8 @@ ylabel('Genetic distance')
 Set_fig_RE(hfig,14,14,14)
 
 %%
-filename='NaturalIsolates_correlation_setpoint_genetic distance';
-export_fig(filename, '-pdf','-transparent','-nocrop');
+filename='NaturalIsolates_correlation_genetic distance_setpoint';
+export_fig_specific_path(filename, '-pdf','-transparent','-nocrop');
 
 %%
 

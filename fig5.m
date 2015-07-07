@@ -58,15 +58,15 @@ errorbar(1:length(yjm_sp),yjm_sp,std_error_YJM(loc),'ok','MarkerFaceColor','red'
 
 lab = strain_name_conv(natural_isos(loc));
 
-ylim([-9 -3]);
+set_yaxis() ;
 
 xlim([0 length(lab)+1]);
 xticklabel_rotate([1:length(lab)],45,lab,'interpreter','tex');
 
 Set_fig_RE(k,9,9,9);
 box off;
-filename = ['fig6_both_alleles.pdf'];
-export_fig(filename, '-pdf','-transparent','-nocrop');
+filename = ['fig5_both_alleles.pdf'];
+export_fig_specific_path(filename, '-pdf','-transparent','-nocrop');
 
 %% plot setpoint gradients with error bars
 
@@ -88,7 +88,7 @@ errorbar(1:length(sp_mean_YJM),sp_mean_YJM(pos),std_error_YJM(pos),'ok','MarkerF
 natural_isos = natural_isos_ref(strains_YJM(pos));
 lab = strain_name_conv(natural_isos);
 
-ylim([-9 -3]);
+set_yaxis() ;
 
 xlim([0 length(lab)+1]);
 xticklabel_rotate([1:length(lab)],45,lab,'interpreter','tex');
@@ -96,6 +96,6 @@ xticklabel_rotate([1:length(lab)],45,lab,'interpreter','tex');
 Set_fig_RE(k,9,9,9);
 box off;
 
-filename = ['fig6_both_alleles_stacked.pdf'];
-export_fig(filename, '-pdf','-transparent','-nocrop');
+filename = ['fig5_both_alleles_stacked.pdf'];
+export_fig_specific_path(filename, '-pdf','-transparent','-nocrop');
 

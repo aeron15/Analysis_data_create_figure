@@ -11,7 +11,8 @@ function format_fig_KL(figure, strains, loc)
 
 lab = strain_name_conv(strains);
 
-ylim([-9.5 -3]);
+%ylim([-9.5 -3]);
+set_yaxis()
 
 xlim([0 length(lab)+1]);
 xticklabel_rotate([1:length(lab)],45,lab(loc),'interpreter','tex');
