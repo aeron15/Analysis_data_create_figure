@@ -10,11 +10,13 @@ function compute_setpoints_reference_BC187()
 load(['../data/setpoints_normalized_area.mat']);
 
 %% Filter data using 2 standard deviations from the median reference BC187 value
+% setpoints_normalized(:,1:2) = num2cell(mean_setpoint(:,1:2));
 setpoints_normalized=filterData_onlyforNaturalIsolates(setpoints_normalized);
 
 %% Create variable equivalent to dif_sp.mat from the plot_all_figs_1
 
 all_strains_vals_vector=cell2mat(setpoints_normalized(:,2));
+% all_strains_vals_vector=cell2mat(setpoints_normalized(:,2))-cell2mat(setpoints_normalized(:,1));
 all_strains_names=setpoints_normalized(:,3);
 
 save('../outputFigures/all_strains_vals_vector','all_strains_vals_vector');
@@ -48,6 +50,7 @@ filename='All_data';
 
 %Compute coefficient of variation across all the paper
 AllData_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
+add_entry_log('Coefficient of variation across all experiments',AllData_CoefficientOfVariation);
 
 save('../outputFigures/data_output_figure_glucose_titration','data_output');
 
@@ -81,7 +84,8 @@ save('../outputFigures/data_output_natural_isolates_glucose_titration','data_out
 
 %Compute coefficient of variation across all the paper
 NaturalIsolates_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
-
+%NaturalIsolates_mean=mean(data_output); Does this need to be the scaled
+%mean?
 
 %>>>>>LOG ENTRIES
 add_entry_log('Number of natural isolates',length({data_output.strain}));
@@ -108,9 +112,7 @@ strain2= data_output(loc(end)).strain;
 
 % Average standard deviation of natural isolates set point of induction
 NaturalIsolates_AverageStandardDeviation=compute_average_standard_deviation(data_output);
-
-% Average standard deviation of natural isolates set point of induction
-NaturalIsolates_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
+add_entry_log('Average standard deviation between natural isolates', NaturalIsolates_AverageStandardDeviation);
 
 %Range of the natural isolates strains on figure 4
 strain1='YJM421';
@@ -133,6 +135,11 @@ save('../outputFigures/data_output_figure_3','data_output');
 
 %Compute precent conversion
 [YJM978bg_PercentConversion,BC187bg_PercentConversion,Error_conversion_YJ,Error_conversion_BC]=compute_conversion_rate_between_BC187_YJM978()
+add_entry_log('YJM978 background percent conversion', YJM978bg_PercentConversion);
+add_entry_log('BC187 background percent conversion', BC187bg_PercentConversion);
+add_entry_log('YJM978 error percent conversion', Error_conversion_YJ);
+add_entry_log('BC187 error percent conversion', Error_conversion_BC);
+
 
 %Range of the strains on figure 3
 strain1='GAL3-BC (YJM978)';
@@ -163,13 +170,14 @@ set_2=[fig3(3).values;fig3(4).values-Delta_GAL3];
 [h,p,ci,stats]=ttest2(set_1,set_2);
 
 %>>>>LOG ENTRY
-add_entry_log('Heterologous locus effect T-test result', p);
+add_entry_log('Heterologous locus effect T-test result P-value', p);
 
 %% Figure 4. Natural Isolate ORF swaps into YJM978
 
 %strains = {'RYC45*','RYC58*','RYC49*', 'RYC50*','RYC51*', 'RYC59_1*','RYC52*','RYC60*','RYC62*', 'RYB92*', 'RYC72*','RYD27*', 'RYD28*', 'RYD30*', 'RYD31*', 'RYB59*', 'RYB53*'};
-strains = {'RYC45*','RYC58*','RYC49*', 'RYC50*','RYC51*', 'RYC59_1*','RYC52*','RYC60*','RYC62*', 'RYB92*', 'RYC72*', 'RYD25*', 'RYD27*', 'RYD28*', 'RYD30*', 'RYD31*', 'RYB59*', 'RYB53*'};
-%Remove RYB92 which is the S288C allele
+strains = {'RYC45*','RYC58*','RYC49*', 'RYC50*','RYC51*','RYC52*','RYC60*','RYC62*', 'RYC72*', 'RYD25*', 'RYD27*', 'RYD28*', 'RYD30*', 'RYD31*', 'RYB59*', 'RYB53*'}; %'RYB92*'; 'RYC59*' 
+%Remove RYB92 which is the S288C allele; and RYC59_1 which is the M22
+%allele
 filename='Fig_4_YJ_bg_Diff_alleles';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 save('../outputFigures/data_output_figure_4','data_output');
@@ -180,14 +188,14 @@ strain2= data_output(loc(end)).strain;
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
 
 %>>>>LOG ENTRY
-add_entry_log('Range variation Allele Swaps Figure 4 background YJM978', FoldDifferenceMean);
-add_entry_log('Error range of variation fold Difference', ErrorFoldDifference);
+add_entry_log('Range variation Allele Swaps (Figure 4)', FoldDifferenceMean);
+add_entry_log('Error range of variation fold Difference (Figure 4)', ErrorFoldDifference);
 
 %Compute correlation coefficient between natural isolates and allele
 %replacements
 [NaturalIsolatesSwaps_CorrelationCoefficient,NaturalIsolatesSwaps_PValueCorrelation]=compute_correlation_natural_isolates_allele_replacements;
-add_entry_log('Correlation natural isoaltes and allele swaps', ErrorFoldDifference);
-add_entry_log('P-value Correlation natural isoaltes and allele swaps', NaturalIsolatesSwaps_PValueCorrelation);
+add_entry_log('Correlation natural isolates and allele swaps (Figure 4)', ErrorFoldDifference);
+add_entry_log('P-value Correlation natural isolates and allele swaps (Figure 4)', NaturalIsolatesSwaps_PValueCorrelation);
 
 
 %% Figure 5 BC187 alleles
@@ -203,7 +211,7 @@ StrainsWithBC187Allele_names={data_output.strain}';
 % strain2= 'GAL3-BC187 (I-14)';
 strain1= data_output(loc(1)).strain;
 strain2= data_output(loc(end)).strain;
-[~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2)
+[~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 
 %% Figure 5 YJM978 alleles
@@ -230,12 +238,10 @@ save('../outputFigures/data_output_figure_5','data_output');
 %Determine fold differences between pairs of strains
 [AlleleReplacementBackgrounds_mean,AlleleReplacementBackgrounds_std,AlleleReplacementBackgrounds_sem]=compute_fold_difference_across_backgrounds(data_output,StrainsWithBC187Allele_names,StrainsWithYJM978Allele_names)
 
+
 %% SI figures. Hemizygous hybrid strains
 close all;
-strains={'RYB22';
-    'RYB23';
-    'RYB24'}
-%'RYB42'}
+strains={'RYB22'; 'RYB23'; 'RYB24'}; %'RYB42'}
 filename='GAL3_HH';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 save('../outputFigures/data_output_figure_GAL3HH','data_output');
@@ -243,21 +249,23 @@ save('../outputFigures/data_output_figure_GAL3HH','data_output');
 [GAL3YJHH_h,GAL3YJHH_p]=ttest2(data_output(2).values,data_output(1).values);
 [GAL3BCHH_h,GAL3BCHH_h_p]=ttest2(data_output(3).values,data_output(1).values);
 
+add_entry_log('P-value between GAL3-YJM978 HH and YJM-BC Hybrid', GAL3YJHH_p);
+add_entry_log('P-value between GAL3-BC187 HH and YJM-BC Hybrid', GAL3BCHH_h_p);
 %Mann Whitney U-test (%Check syntax)
 %[p,h,stats] = ranksum(data_output(2).values,data_output(1).values)
 %[h,p,stats]=ranksum(data_output(3).values,data_output(1).values)
 
 %%
-strains={'RYC69';
-    'RYD40';
-    'RYB22'
-    };
+strains={'RYC69';'RYD40';'RYB22'};
 filename='SOK1_HH';
 [data_output,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 save('../outputFigures/data_output_figure_SOK1HH','data_output');
 
 [SOK1BC_h1,SOK1BC_p1]=ttest2(data_output(1).values,data_output(3).values);
 [SOK1YJ_h2,SOK1YJ_p2]=ttest2(data_output(2).values,data_output(3).values);
+
+add_entry_log('P-value between SOK1-BC187 HH and YJM-BC Hybrid', SOK1BC_p1);
+add_entry_log('P-value between SOK1-YJM978 HH and YJM-BC Hybrid', SOK1YJ_p2);
 
 %% CREATE LOG with all the numbers
 %>>> EXPORT TO LOG

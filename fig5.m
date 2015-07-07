@@ -12,8 +12,8 @@ for iStrain = 1:length(strains_YJM)
     
     idx = find(cs==0);
 
-    sp_mean_YJM(iStrain) = mean(diff_sp(idx));
-    sp_std(iStrain) = std(diff_sp(idx));
+    sp_mean_YJM(iStrain) = nanmean(diff_sp(idx));
+    sp_std(iStrain) = nanstd(diff_sp(idx));
     std_error_YJM(iStrain) = sp_std(iStrain)/sqrt(length(idx)-1);
  
 end
@@ -25,8 +25,8 @@ for iStrain = 1:length(strains_BC)
     
     idx = find(cs==0);
 
-    sp_mean_BC(iStrain) = mean(diff_sp(idx));
-    sp_std(iStrain) = std(diff_sp(idx));
+    sp_mean_BC(iStrain) = nanmean(diff_sp(idx));
+    sp_std(iStrain) = nanstd(diff_sp(idx));
     std_error_BC(iStrain) = sp_std(iStrain)/sqrt(length(idx)-1);
  
 end
@@ -42,8 +42,8 @@ for iStrain = 1:length(natural_isos)
     set_temp(:,iStrain) = strcmp(natural_isos{iStrain}, names);
     idx = find(set_temp(:,iStrain)==1);
 
-    sp_mean(iStrain) = mean(diff_sp(idx));
-    sp_std(iStrain) = std(diff_sp(idx));
+    sp_mean(iStrain) = nanmean(diff_sp(idx));
+    sp_std(iStrain) = nanstd(diff_sp(idx));
     std_error(iStrain) = sp_std(iStrain)/sqrt(length(idx)-1);
     
 end
@@ -66,7 +66,7 @@ xticklabel_rotate([1:length(lab)],45,lab,'interpreter','tex');
 Set_fig_RE(k,9,9,9);
 box off;
 filename = ['fig5_both_alleles.pdf'];
-export_fig_specific_path(filename, '-pdf','-transparent','-nocrop');
+% export_fig_specific_path(filename, '-pdf','-transparent','-nocrop');
 
 %% plot setpoint gradients with error bars
 
