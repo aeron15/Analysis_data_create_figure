@@ -1,3 +1,4 @@
+
 function setpoints_normalized=filterData_onlyforNaturalIsolates(setpoints_normalized)
 
 %filterData_onlyforNaturalIsolates
@@ -32,6 +33,7 @@ setpoints_normalized=extract_data(strains, setpoints_normalized);
 %%
 
 BC187_vals_vector=cell2mat(setpoints_normalized(:,1));
+setpoints_normalized(isnan(BC187_vals_vector),:)=[];
 BC187_vals_vector(isnan(BC187_vals_vector))=[];
 
 BC187_mean=nanmean(BC187_vals_vector);
@@ -52,8 +54,12 @@ idx_to_remove=(BC187_vals_vector<higher_bound | BC187_vals_vector>lower_bound);
 % %Cases to be removed
 % %setpoints_normalized(idx_to_remove,:)
 % 
+add_entry_log('Total number of experiments before reference filtering',length(setpoints_normalized));
+
 removedStrains_number=sum(idx_to_remove);
 setpoints_normalized(idx_to_remove,:)=[];
+
+add_entry_log('Number of strains removed by reference filtering',removedStrains_number);
 
 %% Remove instances where there is only one replicate of the data
 strains_names=setpoints_normalized(:,3);

@@ -21,6 +21,7 @@ for iStrain = 1:length(strains)
          filtered_setpoints_normalized{counter,1}=setpoints_normalized{idx(i),1};
          filtered_setpoints_normalized{counter,2}=setpoints_normalized{idx(i),2};
          filtered_setpoints_normalized{counter,3}=setpoints_normalized{idx(i),3};
+         filtered_setpoints_normalized{counter,4}=setpoints_normalized{idx(i),4};
          
          counter=counter+1;
          
