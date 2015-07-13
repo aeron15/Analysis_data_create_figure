@@ -47,6 +47,6 @@ meanQuery = nanmean(ANOVA_matrix);
 [maxQuery, posMax] = max(meanQuery);
 [minQuery, posMin] = min(meanQuery);
 
-strain1=ANOVA_Query_Strains(posMax); 
-strain2=ANOVA_Query_Strains(posMin);
+strain1=ANOVA_Query_Strains{posMax}; 
+strain2=ANOVA_Query_Strains{posMin};
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
