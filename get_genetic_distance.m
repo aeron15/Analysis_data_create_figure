@@ -5,6 +5,10 @@ function QueryStrains_genetic_distance=get_genetic_distance(Strain_1,Strain_2)
 
 load('Cromie_distances_2.mat')
 
+CromieStrains_names(124) = {'BC186_Group_2_1.00'}; %change name so not called with YPS606
+CromieStrains_names(119) = {'T3r_Group_5_0.85'}; %change name so not called with T7
+CromieStrains_names(173) = {'T3g_Group_5_0.51'}; %change name so not called with T7
+
 %Check if replacing is needed
 
 Strain_1=replace_strain(Strain_1);

@@ -1,4 +1,4 @@
-function [p,tbl,stats]=compute_ANOVA(ANOVA_Query_Strains,data_output,Strain_names)
+function [p,tbl,stats, ANOVA_Columns]=compute_ANOVA(ANOVA_Query_Strains,data_output,Strain_names)
 
 counter=1;
 for iStrain=1:length(ANOVA_Query_Strains)
@@ -40,3 +40,13 @@ for iQueryStrain=1:length(QueryStrains_idx)
 end
 
 [p,tbl,stats] =anova1(ANOVA_matrix);
+
+%% Determine fold difference minimum and maximum of query strains
+
+meanQuery = nanmean(ANOVA_matrix);
+[maxQuery, posMax] = max(meanQuery);
+[minQuery, posMin] = min(meanQuery);
+
+strain1=ANOVA_Query_Strains(posMax); 
+strain2=ANOVA_Query_Strains(posMin);
+[~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);

@@ -82,14 +82,77 @@ filename='Fig_1_natural_isolates';
 save('../outputFigures/data_output_figure_1','data_output','loc');
 save('../outputFigures/data_output_natural_isolates_glucose_titration','data_output','loc');
 
-%Compute coefficient of variation across all the paper
+%% Compute ANOVAs to determine setpoint similarities
+wineEuropean_W = {'BC187'; 'DBVPG1106'; 'DBVPG1373'; 'DBVPG6765'; 'L_1374';
+    'L_1528'; 'YJM975'; 'YJM978'; 'YJM981'; 'Bb32';};
+[p,tbl,stats, numberOfStrains]=compute_ANOVA(wineEuropean_W,data_output,{data_output.strain});
+add_entry_log('Population History Wine/European ANOVA (Warringer Strains)',p);
+add_entry_log('Number of strains - Population History Wine/European ANOVA (Warringer Strains)',numberOfStrains);
+
+wineEuropean = {'BC187'; 'DBVPG1106'; 'DBVPG1373'; 'DBVPG6765'; 'L-1374';
+    'L-1528'; 'YJM975'; 'YJM978'; 'YJM981'; 'Bb32'; 'WE372'; 'M22'};
+[p,tbl,stats, numberOfStrains]=compute_ANOVA(wineEuropean,data_output,{data_output.strain});
+add_entry_log('Population History Wine/European ANOVA (All)',p);
+add_entry_log('Number of strains - Population History Wine/European ANOVA (All)',numberOfStrains);
+
+northAmerican = {'YPS128'; 'YPS163'; 'YPS606'};
+[p,tbl,stats, numberOfStrains]=compute_ANOVA(northAmerican,data_output,{data_output.strain});
+add_entry_log('Population History North American ANOVA',p);
+add_entry_log('Number of strains - Population History North American ANOVA',numberOfStrains);
+
+fermentation_W = {'BC187'; 'DBVPG1106'; 'CLIB382'; 'DBVPG1853'; 
+    'L-1374'; 'L-1528'; 'I-14'; 'Y12-SGRP'; 'Bb32';'DBVPG6040'; 'Y12-WashU'; 'Y9-WashU'};
+[p,tbl,stats, numberOfStrains]=compute_ANOVA(fermentation_W,data_output,{data_output.strain});
+add_entry_log('Ecologocial niche fermentation ANOVA (Warringer)',p);
+add_entry_log('Number of strains - Ecologocial niche fermentation ANOVA (Warringer)',numberOfStrains);
+
+fermentation = {'BC187'; 'DBVPG1106'; 'CLIB382'; 'DBVPG1853'; 
+    'L-1374'; 'L-1528'; 'I-14'; 'UC5'; 'Y12-SGRP'; 'M22'; 'WE372'; 'Bb32';
+    'DBVPG6040'; 'Y12-WashU'; 'Y9-WashU'};
+[p,tbl,stats, numberOfStrains]=compute_ANOVA(fermentation,data_output,{data_output.strain});
+add_entry_log('Ecologocial niche fermentation ANOVA (All)',p);
+add_entry_log('Number of strains - Ecologocial niche fermentation ANOVA (All)',numberOfStrains);
+
+clinical = {'YJM421'; 'YJM428'; 'YJM653'; 'YJM975'; 'YJM978'; 'YJM981'};
+[p,tbl,stats, numberOfStrains]=compute_ANOVA(clinical,data_output,{data_output.strain});
+add_entry_log('Ecologocial niche clinical isolate ANOVA',p);
+add_entry_log('Number of strains - Ecologocial niche clinical isolate ANOVA',numberOfStrains);
+
+wild_W = {'YPS606'; 'YPS128'; 'DBVPG1373'; 'UWOPS87-242.1';
+      'UWOPS03-461.4'; 'DBVPG6765'};
+[p,tbl,stats, numberOfStrains]=compute_ANOVA(wild_W,data_output,{data_output.strain});
+add_entry_log('Ecologocial niche wild ANOVA (Warringer)',p);
+add_entry_log('Number of strains - Ecologocial niche wild ANOVA (Warringer)',numberOfStrains);
+
+wild = {'YPS1009'; 'YPS606'; 'YPS163'; 'YPS128'; 'T7'; 'IL-01'; 'NC-02';
+    'DBVPG6765'; 'DBVPG1373'; 'UWOPS87-242.1'; 'UWOPS03-461.4'};
+[p,tbl,stats, numberOfStrains]=compute_ANOVA(wild,data_output,{data_output.strain});
+add_entry_log('Ecologocial niche wild ANOVA (All)',p);
+add_entry_log('Number of strains - Ecologocial niche wild ANOVA (All)',numberOfStrains);
+
+sameORF = {'T7'; 'YPS606'; 'YPS163'; 'YPS128'};
+[p,tbl,stats, numberOfStrains]=compute_ANOVA(sameORF,data_output,{data_output.strain});
+add_entry_log('Strains with the same ORF ANOVA',p);
+add_entry_log('Number of strains - Strains with the same ORF ANOVA',numberOfStrains);
+
+%Ttest between YPS163(34) and T7(18); same ORF and promoter
+[h,p,ci,stats]=ttest2(data_output(34).values,data_output(18).values);
+add_entry_log('Strains with the same ORF and promoter YPS163 and T7 T-test',p);
+
+%Ttest between YJM421(26) and S288C(17); same ORF and promoter
+[h,p,ci,stats]=ttest2(data_output(26).values,data_output(17).values);
+add_entry_log('Strains with the same ORF and promoter YJM421 and S288C T-test',p);
+
+%% Compute coefficient of variation across all the paper
 NaturalIsolates_CoefficientOfVariation=compute_average_coefficient_of_variation(data_output);
-%NaturalIsolates_mean=mean(data_output); Does this need to be the scaled
-%mean?
+[meanOfDist,medianOfDist,GAL_GLU_ratio]=compute_mean_natural_isos(data_output);
 
 %>>>>>LOG ENTRIES
 add_entry_log('Number of natural isolates',length({data_output.strain}));
 add_entry_log('Natural Isolates coefficient of variation across replicates', NaturalIsolates_CoefficientOfVariation);
+add_entry_log('Mean of natural isolate distribution',meanOfDist);
+add_entry_log('Median of natural isolate distribution', medianOfDist);
+add_entry_log('Galactose:Glucose decision ratio', GAL_GLU_ratio);
 
 %Correlation genetic distance and set point of induction using RAD-seq data
 NaturalIsolates_correlation=compute_correlation_genetic_distance_set_point_induction(data_output,loc);
@@ -115,13 +178,11 @@ NaturalIsolates_AverageStandardDeviation=compute_average_standard_deviation(data
 add_entry_log('Average standard deviation between natural isolates', NaturalIsolates_AverageStandardDeviation);
 
 %Range of the natural isolates strains on figure 4
-strain1='YJM421';
-strain2='DBVPG1373';
+strain1='YJM421'; strain2='YPS163';
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 %Range of the strains on figure 5
-strain1='YJM978';
-strain2='I-14';
+strain1='Y9-WashU'; strain2='CLIB382';
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 
@@ -152,25 +213,37 @@ strain2='GAL3-YJM (BC187) ';
 [~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(data_output,strain1,strain2);
 
 
-%% Figure 3 test heterologos locus effect
+%% Figure 3 test heterologuos locus effect
 strains = {'RY16*', 'RYB53*', 'RYB59*', 'RYB65*', 'RYB66*', 'RYB28*'};
 
 filename='Fig_3_allele_swaps';
 [fig3,loc]=make_dot_plot(strains, all_strains_vals_vector, all_strains_names, filename);
 
-BC_het_effect=mean([fig3(4).values;fig3(6).values]);
-YJ_het_effect=mean([fig3(1).values;fig3(3).values]);
+% BC_het_effect=mean([fig3(4).values;fig3(6).values]);
+% YJ_het_effect=mean([fig3(1).values;fig3(3).values]);
+% 
+% Delta_GAL3=BC_het_effect-YJ_het_effect;
+% 
+% set_1=[fig3(1).values;fig3(6).values-Delta_GAL3];%haploids
+% set_2=[fig3(3).values;fig3(4).values-Delta_GAL3];
 
-Delta_GAL3=BC_het_effect-YJ_het_effect;
-
-set_1=[fig3(1).values;fig3(6).values-Delta_GAL3];%haploids
-set_2=[fig3(3).values;fig3(4).values-Delta_GAL3];
+% [h,p,ci,stats]=ttest2(set_1,set_2);
 
 %T-TEST
-[h,p,ci,stats]=ttest2(set_1,set_2);
+[h,p_BC187,ci,stats]=ttest2(fig3(6).values,fig3(4).values); %6 = BChaploid, 4 = BC-BC
+[h,p_YJM978,ci,stats]=ttest2(fig3(1).values,fig3(3).values); %1 = YJMhaploid, 3 = YJM-YJM
 
 %>>>>LOG ENTRY
-add_entry_log('Heterologous locus effect T-test result P-value', p);
+add_entry_log('Heterologous locus effect T-test result P-value BC187', p_BC187);
+add_entry_log('Heterologous locus effect T-test result P-value YJM978', p_YJM978);
+
+%Range of haploids/heterologous replacement (BC187)
+strain1='BC187 (Haploid)'; strain2='GAL3-BC (BC187) ';
+[~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(fig3,strain1,strain2);
+
+%Range of haploids/heterologous replacement (YJM978)
+strain1='YJM978 (Haploid)'; strain2='GAL3-YJM (YJM978)';
+[~,~,FoldDifferenceMean,ErrorFoldDifference]=compute_fold_difference(fig3,strain1,strain2);
 
 %% Figure 4. Natural Isolate ORF swaps into YJM978
 

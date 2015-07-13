@@ -64,4 +64,8 @@ NaturalIsolates_correlation=nancorr(x,QueryStrains_MeanGeneticDistance);
 save('NaturalIsolates_GeneticDistance_CorrelationData','QueryStrains_matrix','QueryStrains_MeanGeneticDistance')
 
 
+%% Plot phylgenetic tree and decision threshold chart
+
+SetpointPhylogeny(QueryStrains_MeanGeneticDistance, QueryStrains_matrix, data_output);
+
 end

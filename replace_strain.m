@@ -22,24 +22,42 @@ if strcmp(Strain,'I-14')
     
 end
 
-if strcmp(Strain,'Y12-WashU')
+if strcmp(Strain,'YJM421')
     
-    Strain='Y12';
+    Strain='YJM421r';
     
 end
+
+if strcmp(Strain,'CLIB382')
+    
+    Strain='CLIB382r';
+    
+end
+
+if strcmp(Strain,'CLIB324')
+    
+    Strain='CLIB324r';
+    
+end
+
+% if strcmp(Strain,'Y12-WashU')
+%     
+%     Strain='Y12';
+%     
+% end
 
 
 if strcmp(Strain,'Y9-WashU')
     
-    Strain='Y9';
+    Strain='Y9r';
     
 end
 
 
-if strcmp(Strain,'UWOPS87-242.1')
-    
-    Strain='UWOPS87-2421';
-    
-end
+% if strcmp(Strain,'UWOPS87-242.1')
+%     
+%     Strain='UWOPS87-2421';
+%     
+% end
 
 end
