@@ -1,4 +1,4 @@
-function [GLUmean_naturalIsos,medianOfDist,GAL_GLU_ratio]=compute_mean_natural_isos(data_output)
+function [GLUmean_naturalIsos,GLUmedian_naturalIsos,GAL_GLU_ratio_median]=compute_mean_natural_isos(data_output)
 
 %Computes the mean of the distribution of natural isolates and other
 %descriptive features of the distribution
@@ -20,11 +20,14 @@ end
 
 meanOfDist = nanmean(QuerySetpoint_mean);
 medianOfDist = median(QuerySetpoint_mean);
-stdOfDist = nanstd(QuerySetpoint_mean);
 
 %Convert mean to glucose space
 GLUmean_naturalIsos = 2^meanOfDist;
-GAL_GLU_ratio = .125/GLUmean_naturalIsos;
+GAL_GLU_ratio_mean = .125/GLUmean_naturalIsos;
+
+%Convert median to glucose space
+GLUmedian_naturalIsos = 2^medianOfDist;
+GAL_GLU_ratio_median = .125/GLUmedian_naturalIsos;
 
 [distribution_min, loc1] = min(QuerySetpoint_mean);
 dist_min_GLU = 2^distribution_min;
@@ -33,6 +36,18 @@ error_std_min = QuerySetpoint_std(loc1);
 [distribution_max, loc2] = max(QuerySetpoint_mean);
 dist_max_GLU = 2^distribution_max;
 error_std_max = QuerySetpoint_std(loc2);
+
+%Determine fold interval within median
+h = boxplot(QuerySetpoint_mean);
+boxplot_values = get(h, 'ydata');
+
+upperBound=boxplot_values{2}(2);
+lowerBound=boxplot_values{1}(1);
+
+FoldDifference=2.^abs(upperBound-lowerBound);
+add_entry_log('Fold interval of median of natural isolates',FoldDifference);
+
+
 
 end
 

@@ -68,4 +68,12 @@ save('NaturalIsolates_GeneticDistance_CorrelationData','QueryStrains_matrix','Qu
 
 SetpointPhylogeny(QueryStrains_MeanGeneticDistance, QueryStrains_matrix, data_output);
 
+%% Plot traits from Warringer
+load('natural_isolate_matrix.mat');
+
+matchingStrains = natural_isolate_matrix(1,:);
+
+subQueryStrainsMatrix = subSampleGeneticDistance(QueryStrains_matrix, matchingStrains);
+generateDistPhenotypeWar(subQueryStrainsMatrix, natural_isolate_matrix, NaturalIsolates_correlation);
+
 end

@@ -267,7 +267,7 @@ add_entry_log('Error range of variation fold Difference (Figure 4)', ErrorFoldDi
 %Compute correlation coefficient between natural isolates and allele
 %replacements
 [NaturalIsolatesSwaps_CorrelationCoefficient,NaturalIsolatesSwaps_PValueCorrelation]=compute_correlation_natural_isolates_allele_replacements;
-add_entry_log('Correlation natural isolates and allele swaps (Figure 4)', ErrorFoldDifference);
+add_entry_log('Correlation natural isolates and allele swaps (Figure 4)', NaturalIsolatesSwaps_CorrelationCoefficient);
 add_entry_log('P-value Correlation natural isolates and allele swaps (Figure 4)', NaturalIsolatesSwaps_PValueCorrelation);
 
 
